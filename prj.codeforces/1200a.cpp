@@ -1,6 +1,6 @@
 // 2023 by Gumirov Mikhail
 // task source https://codeforces.com/problemset/problem/1200/A
-// 1200A. Панграмма
+// 1200A. Отельер
 
 #include <iostream>
 #include <string>
