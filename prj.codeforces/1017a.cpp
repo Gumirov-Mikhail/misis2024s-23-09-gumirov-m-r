@@ -1,5 +1,5 @@
 // 2023 by Gumirov Mikhail
-// task source https://codeforces.com/problemset/problem/768/A
+// task source https://codeforces.com/problemset/problem/1017/A
 // 1017A. Место в таблице
 
 #include <vector>
