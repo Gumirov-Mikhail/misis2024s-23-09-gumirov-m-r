@@ -1,0 +1,3 @@
+C:/Users/Михаил/misis2024s-23-09-gumirov-m-r/cmake-build-debug/CMakeFiles/misis2024s_23_09_gumirov_m_r.dir
+C:/Users/Михаил/misis2024s-23-09-gumirov-m-r/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Михаил/misis2024s-23-09-gumirov-m-r/cmake-build-debug/CMakeFiles/rebuild_cache.dir
