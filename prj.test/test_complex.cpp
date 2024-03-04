@@ -1,6 +1,6 @@
 // 2024 by Gumirov Mikhail under Unlicense
-#include <iostream>
+#include <complex/complex.hpp>
 
 int main() {
-  std::cout << 5;
+  Complex c;
 }
