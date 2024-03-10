@@ -2,7 +2,7 @@
 #define COMPLEX_COMPLEX_H
 
 #include <iosfwd>
-#include <ostream>
+#include <iostream>
 #include <cmath>
 #include <string>
 #include <sstream>
