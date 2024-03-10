@@ -33,3 +33,5 @@
 
 *.vscode
 *build
+*bin.dbg
+*cmake-build-debug
