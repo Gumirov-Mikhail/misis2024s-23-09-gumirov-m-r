@@ -18,10 +18,9 @@ struct Complex {
     ~Complex() = default;
 
     [[nodiscard]] Complex operator-() const noexcept;
-    [[nodiscard]] bool operator==(const Complex& rhs) const noexcept;
 
-    //! \brief Сравнение комплексных чисел на неравенство. \sa Complex::operator==
-    [[nodiscard]] bool operator!=(const Complex& rhs) const noexcept;//???
+    [[nodiscard]] bool operator==(const Complex& rhs) const noexcept;
+    [[nodiscard]] bool operator!=(const Complex& rhs) const noexcept;
 
     Complex& operator+=(const Complex& rhs) noexcept;
     Complex& operator+=(const double rhs) noexcept;
@@ -33,11 +32,6 @@ struct Complex {
     Complex& operator/=(const double rhs);
 
     [[nodiscard]] std::ostream& WriteTo(std::ostream& ostrm) const noexcept;
-
-  //! \brief Форматированный ввод из потока istrm комплексного числа в виде {re,im}.
-  //!
-  //! \param[in,out] istrm - поток
-  //! \retval поток
     [[nodiscard]] std::istream& ReadFrom(std::istream& istrm) noexcept;
 
     double re{ 0.0 };
