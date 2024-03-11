@@ -150,6 +150,44 @@ std::istream& Rational::ReadFrom(std::istream& istrm) noexcept {
     return istrm;
 }
 
+Rational& Rational::operator++() noexcept {
+    num_ += den_;
+    std::int64_t nod = evkl(num_, den_);
+    num_ /= nod;
+    den_ /= nod;
+    this->round();
+    return *this;
+}
+
+Rational Rational::operator++(int) noexcept {
+    Rational a(num_, den_);
+    num_ += den_;
+    std::int64_t nod = evkl(num_, den_);
+    num_ /= nod;
+    den_ /= nod;
+    this->round();
+    return a;
+}
+
+Rational& Rational::operator--() noexcept {
+    num_ -= den_;
+    std::int64_t nod = evkl(num_, den_);
+    num_ /= nod;
+    den_ /= nod;
+    this->round();
+    return *this;
+}
+
+Rational Rational::operator--(int) noexcept {
+    Rational a(num_, den_);
+    num_ -= den_;
+    std::int64_t nod = evkl(num_, den_);
+    num_ /= nod;
+    den_ /= nod;
+    this->round();
+    return a;
+}
+
 std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) noexcept { return ostrm; }
 
 std::istream& operator>>(std::istream& istrm, Rational& rhs) noexcept { return istrm; }
