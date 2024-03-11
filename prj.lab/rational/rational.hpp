@@ -43,15 +43,20 @@ public:
     std::ostream& WriteTo(std::ostream& ostrm) const noexcept;
     std::istream& ReadFrom(std::istream& istrm) noexcept;
 
-    std::int64_t evkl(const std::int64_t lhs, const std::int64_t rhs) noexcept;
-    std::int64_t evkl(const Rational& lhs) noexcept { return evkl(lhs.num_, lhs.den_); }
-    Rational& round();
+    Rational& operator++() noexcept;
+    Rational operator++(int) noexcept;
+
+    Rational& operator--() noexcept;
+    Rational operator--(int) noexcept;
 
 private:
     std::int64_t num_ = 0;
     std::int64_t den_ = 1;
     static const char sl {'/'};
 
+    std::int64_t evkl(const std::int64_t lhs, const std::int64_t rhs) noexcept;
+    std::int64_t evkl(const Rational& lhs) noexcept { return evkl(lhs.num_, lhs.den_); }
+    Rational& round();
 };
 
 [[nodiscard]] Rational operator+(const Rational& lhs, const Rational& rhs) noexcept;
@@ -74,4 +79,3 @@ std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) noexcept;
 std::istream& operator>>(std::istream& istrm, Rational& rhs) noexcept;
 
 #endif
-
