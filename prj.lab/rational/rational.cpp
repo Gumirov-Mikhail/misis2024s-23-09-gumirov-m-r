@@ -15,7 +15,7 @@ Rational::Rational(const std::int64_t num, const std::int64_t den)
     }
 }
 
-std::int64_t evkl(const std::int64_t lhs, const std::int64_t rhs) noexcept {
+std::int64_t Rational::evkl(const std::int64_t lhs, const std::int64_t rhs) noexcept {
     std::int64_t maxe;
     std::int64_t mine;
     std::int64_t temp;
