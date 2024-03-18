@@ -36,3 +36,4 @@
 *bin.dbg
 *cmake-build-debug
 *status.md
+*.idea
