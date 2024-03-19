@@ -92,8 +92,8 @@ Rational& Rational::operator*=(const Rational& rhs) noexcept {
 }
 
 Rational& Rational::operator/=(const Rational& rhs) {
-    num_ = num_ * rhs.num_;
-    den_ = den_ * rhs.den_;
+    num_ = num_ * rhs.den_;
+    den_ = den_ * rhs.num_;
     std::int64_t nod = evkl(num_, den_);
     num_ /= nod;
     den_ /= nod;
@@ -188,6 +188,10 @@ Rational Rational::operator--(int) noexcept {
     return a;
 }
 
-std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) noexcept { return ostrm; }
+std::ostream& operator<<(std::ostream& ostrm, const Rational& rhs) noexcept {
+    return rhs.WriteTo(ostrm);
+}
 
-std::istream& operator>>(std::istream& istrm, Rational& rhs) noexcept { return istrm; }
+std::istream& operator>>(std::istream& istrm, Rational& rhs) noexcept {
+    return rhs.ReadFrom(istrm);
+}
