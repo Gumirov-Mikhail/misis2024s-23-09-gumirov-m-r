@@ -8,28 +8,29 @@ Rational::Rational(const std::int64_t num, const std::int64_t den)
         throw std::invalid_argument("Zero denumenator in Rational ctor");
     }
     else {
-        std::int64_t nod = evkl(num_, den_);
-        num_ /= nod;
-        den_ /= nod;
-        this->round();
+        evkl();
+        round();
     }
 }
 
-std::int64_t Rational::evkl(const std::int64_t lhs, const std::int64_t rhs) noexcept {
+void Rational::evkl() noexcept {
     std::int64_t maxe;
     std::int64_t mine;
     std::int64_t temp;
-    maxe = std::max(std::abs(lhs), std::abs(rhs));
-    mine = std::min(std::abs(lhs), std::abs(rhs));
+    maxe = std::max(std::abs(num_), std::abs(den_));
+    mine = std::min(std::abs(num_), std::abs(den_));
     if (mine == 0) {
-        return maxe;
+        num_ /= maxe;
+        den_ /= maxe;
+        return;
     }
     while (maxe % mine != 0) {
         temp = maxe % mine;
         maxe = mine;
         mine = temp;
     }
-    return mine;
+    num_ /= mine;
+    den_ /= mine;
 }
 
 Rational& Rational::round() {
@@ -64,40 +65,35 @@ bool Rational::operator>=(const Rational& rhs) const noexcept {
 Rational& Rational::operator+=(const Rational& rhs) noexcept {
     num_ = num_ * rhs.den_ + rhs.num_ * den_;
     den_ = den_ * rhs.den_;
-    std::int64_t nod = evkl(num_, den_);
-    num_ /= nod;
-    den_ /= nod;
-    this->round();
+    evkl();
+    round();
     return *this;
 }
 
 Rational& Rational::operator-=(const Rational& rhs) noexcept {
     num_ = num_ * rhs.den_ - rhs.num_ * den_;
     den_ = den_ * rhs.den_;
-    std::int64_t nod = evkl(num_, den_);
-    num_ /= nod;
-    den_ /= nod;
-    this->round();
+    evkl();
+    round();
     return *this;
 }
 
 Rational& Rational::operator*=(const Rational& rhs) noexcept {
     num_ = num_ * rhs.num_;
     den_ = den_ * rhs.den_;
-    std::int64_t nod = evkl(num_, den_);
-    num_ /= nod;
-    den_ /= nod;
-    this->round();
+    evkl();
+    round();
     return *this;
 }
 
 Rational& Rational::operator/=(const Rational& rhs) {
+    if (rhs.num_ == 0) {
+        throw std::invalid_argument("Division by zero!");
+    }
     num_ = num_ * rhs.den_;
     den_ = den_ * rhs.num_;
-    std::int64_t nod = evkl(num_, den_);
-    num_ /= nod;
-    den_ /= nod;
-    this->round();
+    evkl();
+    round();
     return *this;
 }
 
@@ -152,39 +148,31 @@ std::istream& Rational::ReadFrom(std::istream& istrm) noexcept {
 
 Rational& Rational::operator++() noexcept {
     num_ += den_;
-    std::int64_t nod = evkl(num_, den_);
-    num_ /= nod;
-    den_ /= nod;
-    this->round();
+    evkl();
+    round();
     return *this;
 }
 
 Rational Rational::operator++(int) noexcept {
     Rational a(num_, den_);
     num_ += den_;
-    std::int64_t nod = evkl(num_, den_);
-    num_ /= nod;
-    den_ /= nod;
-    this->round();
+    evkl();
+    round();
     return a;
 }
 
 Rational& Rational::operator--() noexcept {
     num_ -= den_;
-    std::int64_t nod = evkl(num_, den_);
-    num_ /= nod;
-    den_ /= nod;
-    this->round();
+    evkl();
+    round();
     return *this;
 }
 
 Rational Rational::operator--(int) noexcept {
     Rational a(num_, den_);
     num_ -= den_;
-    std::int64_t nod = evkl(num_, den_);
-    num_ /= nod;
-    den_ /= nod;
-    this->round();
+    evkl();
+    round();
     return a;
 }
 

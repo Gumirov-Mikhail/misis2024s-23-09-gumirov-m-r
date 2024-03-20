@@ -54,8 +54,7 @@ private:
     std::int64_t den_ = 1;
     static const char sl {'/'};
 
-    std::int64_t evkl(const std::int64_t lhs, const std::int64_t rhs) noexcept;
-    std::int64_t evkl(const Rational& lhs) noexcept { return evkl(lhs.num_, lhs.den_); }
+    void evkl() noexcept;
     Rational& round();
 };
 
