@@ -22,6 +22,19 @@ TEST_CASE("Rational constructor") {
     CHECK_THROWS_WITH(void(Rational(1,0)), "Zero denumenator in Rational ctor");
 }
 
+TEST_CASE("Rational assignment") {
+    Rational r_ch1;
+    Rational r_ch2{2};
+    Rational r_ch3{4, 5};
+    r_ch1 = r_ch2 = r_ch3;
+    CHECK(4 == r_ch1.num());
+    CHECK(5 == r_ch1.den());
+    CHECK(4 == r_ch2.num());
+    CHECK(5 == r_ch2.den());
+    CHECK(4 == r_ch3.num());
+    CHECK(5 == r_ch3.den());
+}
+
 TEST_CASE("Rational comparison") {
     Rational r_ch1{2, 3};
     Rational r_ch2{4, 5};

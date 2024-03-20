@@ -1,6 +1,6 @@
-// 2024 by Gumirov Mikhail under Unlicense
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "doctest.h"
+
 #include <complex/complex.hpp>
 
-int main() {
-  Complex c;
-}
+
