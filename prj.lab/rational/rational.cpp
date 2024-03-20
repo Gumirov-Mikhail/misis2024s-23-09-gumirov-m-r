@@ -97,7 +97,9 @@ Rational& Rational::operator/=(const Rational& rhs) {
     return *this;
 }
 
-Rational& Rational::operator+=(const int64_t rhs) noexcept { return operator+=(Rational(rhs)); };
+Rational& Rational::operator+=(const int64_t rhs) noexcept {
+    return operator+=(Rational(rhs));
+};
 Rational& Rational::operator-=(const int64_t rhs) noexcept { return operator-=(Rational(rhs)); };
 Rational& Rational::operator*=(const int64_t rhs) noexcept { return operator*=(Rational(rhs)); };
 Rational& Rational::operator/=(const int64_t rhs) { return operator/=(Rational(rhs)); };
@@ -113,10 +115,10 @@ Rational operator-(const Rational& lhs, const int64_t rhs) noexcept { return Rat
 Rational operator*(const Rational& lhs, const int64_t rhs) noexcept { return Rational{ lhs } *= rhs; };
 Rational operator/(const Rational& lhs, const int64_t rhs) { return Rational{ lhs } /= rhs; }
 
-Rational operator+(const int64_t lhs, const Rational& rhs) noexcept { return operator+(rhs, lhs); }
-Rational operator-(const int64_t lhs, const Rational& rhs) noexcept { return operator+(rhs, lhs); }
-Rational operator*(const int64_t lhs, const Rational& rhs) noexcept { return operator+(rhs, lhs); }
-Rational operator/(const int64_t lhs, const Rational& rhs) { return operator+(rhs, lhs); }
+Rational operator+(const int64_t lhs, const Rational& rhs) noexcept { return Rational{ lhs } += rhs; }
+Rational operator-(const int64_t lhs, const Rational& rhs) noexcept { return Rational{ lhs } -= rhs; }
+Rational operator*(const int64_t lhs, const Rational& rhs) noexcept { return Rational{ lhs } *= rhs; }
+Rational operator/(const int64_t lhs, const Rational& rhs) { return Rational{ lhs } /= rhs; }
 
 
 std::ostream& Rational::WriteTo(std::ostream& ostrm) const noexcept {
