@@ -1,5 +1,7 @@
 #include <complex/complex.hpp>
 
+#include <stdexcept>
+
 Complex Complex::operator-() const noexcept {
     return Complex(-re, -im);
 }
@@ -47,7 +49,7 @@ Complex& Complex::operator*=(const double rhs) noexcept {
 
 Complex& Complex::operator/=(const Complex& rhs) {
     if (rhs.re == 0 && rhs.im == 0) {
-        errors("Error! Division by zero!");
+        throw std::invalid_argument("Division by zero!");
     }
     else {
         double re1 = re, im1 = im;
@@ -80,11 +82,6 @@ std::istream& Complex::ReadFrom(std::istream& istrm) noexcept {
         }
     }
     return istrm;
-}
-
-void errors(std::string message) {
-	std::cerr << message << std::endl;
-	std::exit(1);
 }
 
 Complex operator+(const Complex& lhs, const Complex& rhs) noexcept { return Complex(lhs) += rhs; }

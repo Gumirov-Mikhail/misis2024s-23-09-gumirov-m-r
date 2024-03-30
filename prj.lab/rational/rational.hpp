@@ -1,6 +1,6 @@
 #pragma once
-#ifndef RATIONAL_RATIONAL_HPP_20231113
-#define RATIONAL_RATIONAL_HPP_20231113
+#ifndef RATIONAL_RATIONAL_HPP_202403
+#define RATIONAL_RATIONAL_HPP_202403
 
 #include <cstdint>
 #include <iosfwd>

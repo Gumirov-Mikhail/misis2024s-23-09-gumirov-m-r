@@ -1,5 +1,6 @@
-#ifndef COMPLEX_COMPLEX_H
-#define COMPLEX_COMPLEX_H
+#pragma once
+#ifndef COMPLEX_COMPLEX_HPP_202402
+#define COMPLEX_COMPLEX_HPP_202402
 
 #include <iosfwd>
 #include <iostream>
@@ -65,7 +66,5 @@ inline std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs) noexcep
 inline std::istream& operator>>(std::istream& istrm, Complex& rhs) noexcept {
     return rhs.ReadFrom(istrm);
 }
-
-void errors(std::string message);
 
 #endif

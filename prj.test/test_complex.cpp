@@ -2,5 +2,3 @@
 #include "doctest.h"
 
 #include <complex/complex.hpp>
-
-
