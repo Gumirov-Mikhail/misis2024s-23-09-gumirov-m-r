@@ -39,7 +39,7 @@ Complex& Complex::operator-=(const double rhs) noexcept {
 Complex& Complex::operator*=(const Complex& rhs) noexcept {
     double re1 = re, im1 = im;
     re = re1 * rhs.re - im1 * rhs.im;
-    im = im1 * rhs.re - re1 * rhs.im;
+    im = im1 * rhs.re + re1 * rhs.im;
     return *this;
 }
 

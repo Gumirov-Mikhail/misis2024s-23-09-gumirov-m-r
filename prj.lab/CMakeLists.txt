@@ -1,2 +1,6 @@
 add_subdirectory(complex)
 add_subdirectory(rational)
+add_subdirectory(stackarr)
+add_subdirectory(stacklst)
+add_subdirectory(template_stackarr)
+add_subdirectory(template_stacklst)
