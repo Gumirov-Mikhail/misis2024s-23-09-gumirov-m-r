@@ -1,5 +1,5 @@
-CHECK: 20240401-065737
-STATUS: lab complex - test-failed
+CHECK: 20240406-023716
+STATUS: lab complex - test-ok
 STATUS: lab complex_io - test-ok
 STATUS: lab complex_m - test-ok
 STATUS: lab rational - test-ok
