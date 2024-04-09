@@ -10,7 +10,7 @@ class StackArr final {
 public:
     StackArr() = default;
 
-    StackArr(const StackArr& src) : size_(src.size_), i_top_(src.i_top_), data_(src.data_) {};
+    StackArr(const StackArr& src);
 
     StackArr(StackArr&& src) noexcept;
 
