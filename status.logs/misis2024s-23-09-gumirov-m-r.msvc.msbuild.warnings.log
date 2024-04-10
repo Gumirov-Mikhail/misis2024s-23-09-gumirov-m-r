@@ -1,0 +1,2 @@
+    24>D:\projects\misis2023f-23-check\misis2024s-23-09-gumirov-m-r\prj.lab\stackarr\stackarr.cpp(33,1): warning C4172: возвращение адреса локальной или временной переменной : Stack [D:\projects\misis2023f-23-check\misis2024s-23-09-gumirov-m-r\build.check\prj.lab\stackarr\stackarr.vcxproj]
+    24>D:\projects\misis2023f-23-check\misis2024s-23-09-gumirov-m-r\prj.lab\stackarr\stackarr.cpp(28,1): warning C4172: возвращение адреса локальной или временной переменной : Stack [D:\projects\misis2023f-23-check\misis2024s-23-09-gumirov-m-r\build.check\prj.lab\stackarr\stackarr.vcxproj]
