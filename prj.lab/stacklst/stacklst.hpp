@@ -1,14 +1,44 @@
-//
-// Created by Михаил on 05.04.2024.
-//
+#pragma once
+#ifndef STACKLST_STACKLST_HPP_202404
+#define STACKLST_STACKLST_HPP_202404
 
-#ifndef GUMIROV_M_R_23_09_STACKLST_HPP
-#define GUMIROV_M_R_23_09_STACKLST_HPP
+#include <complex/complex.hpp>
 
+#include <cstddef>
 
-class stacklst {
+class StackLst final {
+public:
+    StackLst() = default;
 
+    StackLst(const StackLst& src);
+
+    StackLst(StackLst&& src) noexcept;
+
+    ~StackLst() = default;
+
+    StackLst& operator=(const StackLst& src);
+
+    StackLst& operator=(StackLst&& src) noexcept;
+
+    [[nodiscard]] bool IsEmpty() const noexcept;
+
+    void Pop() noexcept;
+
+    void Push(const Complex& val);
+
+    [[nodiscard]] Complex& Top() &;
+
+    [[nodiscard]] const Complex& Top() const &;
+
+    void Clear() noexcept;
+
+private:
+    struct Node {
+        Complex val;
+        Node* next = nullptr;
+    };
+
+    Node* head_ = nullptr;   //!<
 };
 
-
-#endif //GUMIROV_M_R_23_09_STACKLST_HPP
+#endif

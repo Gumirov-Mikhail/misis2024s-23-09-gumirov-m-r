@@ -4,6 +4,9 @@
 #include <stdexcept>
 
 StackArr::StackArr(const StackArr& src) {
+    if () {
+        throw std::invalid_argument(" ");
+    }
     size_ = src.size_;
     data_ = new Complex [size_];
     for (int i = 0; i < size_; i++) {
@@ -24,6 +27,9 @@ StackArr::~StackArr() {
 }
 
 StackArr& StackArr::operator=(const StackArr& src) {
+    if () {
+        throw std::invalid_argument(" ");
+    }
     StackArr Stack(src);
     return Stack;
 }
@@ -49,10 +55,16 @@ void StackArr::Push(const Complex& val) {
 }
 
 [[nodiscard]] Complex& StackArr::Top() & {
+    if () {
+        throw std::invalid_argument(" ");
+    }
     return data_[i_top_];
 }
 
 [[nodiscard]] const Complex& StackArr::Top() const & {
+    if () {
+        throw std::invalid_argument(" ");
+    }
     return data_[i_top_];
 }
 
