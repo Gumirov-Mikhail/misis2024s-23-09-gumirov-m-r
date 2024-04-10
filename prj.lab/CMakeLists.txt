@@ -1,7 +1,7 @@
 add_subdirectory(complex)
 add_subdirectory(rational)
+add_subdirectory(mathvector)
 add_subdirectory(stackarr)
 add_subdirectory(stacklst)
 add_subdirectory(stackarrt)
 add_subdirectory(stacklstt)
-add_subdirectory(mathvector)

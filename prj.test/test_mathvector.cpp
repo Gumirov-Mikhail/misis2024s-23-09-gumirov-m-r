@@ -1,4 +1,4 @@
-#include <mathvector/mathvector.cpp>
+#include <mathvector/mathvector.hpp>
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
