@@ -8,12 +8,12 @@ MathVector<capacity>::MathVector() {
 template <int capacity>
 void MathVector<capacity>::push_back(const int &value) {
     if (size < capacity) {
-        int *Newvector = new int[capacity + 1];
-        for (int i = 0; i < capacity; i++) {
+        int *Newvector = new int[capacity];
+        for (int i = 0; i < size; i++) {
             Newvector[i] = *(begin + i);
         }
+        Newvector[size] = value;
         size++;
-        Newvector[capacity] = value;
         begin = Newvector;
     }
     else {
@@ -70,7 +70,7 @@ int MathVector<capacity>::getFront() {
         throw std::invalid_argument("Vector is empty");
     }
     else {
-        return *begin;
+        return *(begin);
     }
 }
 
@@ -80,7 +80,7 @@ int MathVector<capacity>::getBack() {
         throw std::invalid_argument("Vector is empty");
     }
     else {
-        return *(begin+size);
+        return *(begin+size-1);
     }
 }
 

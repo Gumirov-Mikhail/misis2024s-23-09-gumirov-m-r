@@ -1,11 +1,11 @@
+#include <mathvector/mathvector.cpp>
+
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
 #include "doctest.h"
 
-#include <mathvector/mathvector.hpp>
-
 TEST_CASE("mathvector") {
-    MathVector<2> proba1;
+    MathVector <2> proba1;
     CHECK(proba1.empty() == true);
     CHECK(proba1.getSize() == 0);
     proba1.push_back(5);
@@ -30,7 +30,7 @@ TEST_CASE("mathvector") {
     CHECK((proba1 == proba2) == false);
     CHECK((proba1 != proba2) == true);
     proba2.push_back(7);
-    proba2.push_back(5);
+    proba2.push_back(3);
     CHECK((proba1 == proba2) == true);
     CHECK((proba1 != proba2) == false);
 }
