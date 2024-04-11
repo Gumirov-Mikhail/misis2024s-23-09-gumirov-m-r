@@ -1,17 +1,13 @@
 #include <stackarr/stackarr.hpp>
 
-//#include <algorithm>
 #include <stdexcept>
 
-StackArr::StackArr(const StackArr& src) {
-    if () {
-        throw std::invalid_argument(" ");
-    }
-    size_ = src.size_;
-    data_ = new Complex [size_];
-    for (int i = 0; i < size_; i++) {
-        data_[i] = src.data_[i];
-        i_top_++;
+StackArr::StackArr(const StackArr& src)
+    : i_top_(src.i_top_), size_(src.size_){
+    if (!src.IsEmpty()) {
+        delete [] data_;
+        data_ = new Complex [size_];
+        std::copy(src.data_, src.data_ + size_, data_);
     }
 }
 
@@ -27,43 +23,64 @@ StackArr::~StackArr() {
 }
 
 StackArr& StackArr::operator=(const StackArr& src) {
-    if () {
-        throw std::invalid_argument(" ");
+    if (this != &src) {
+        if (size_ < src.size_) {
+            size_ = src.size_;
+            delete [] data_;
+            data_ = new Complex [size_];
+        }
+        i_top_ = src.i_top_;
+        std::copy(src.data_, src.data_ + size_, data_);
     }
-    StackArr Stack(src);
-    return Stack;
+    return *this;
 }
 
 StackArr& StackArr::operator=(StackArr&& src) noexcept {
-    StackArr Stack(src);
-    return Stack;
+    std::swap(size_, src.size_);
+    std::swap(i_top_, src.i_top_);
+    std::swap(data_, src.data_);
+    return *this;
 }
 
 [[nodiscard]] bool StackArr::IsEmpty() const noexcept {
-    if (size_ == 0) {
+    if (i_top_ == -1) {
         return true;
     }
     return false;
 }
 
 void StackArr::Pop() noexcept {
-
+    if (!IsEmpty()) {
+        i_top_--;
+    }
 }
 
-void StackArr::Push(const Complex& val) {
-
+void StackArr::Push(const Complex& val) noexcept {
+    if (size_ == 0) {
+        size_ = 8;
+        data_ = new Complex[size_];
+    }
+    else if (i_top_ + 1 >= size_) {
+        Complex* Newdata = new Complex[size_ * 2];
+        std::copy(data_, data_ + size_, Newdata);
+        delete [] data_;
+        data_ = Newdata;
+        size_ *= 2;
+    }
+    i_top_++;
+    data_[i_top_] = val;
 }
 
 [[nodiscard]] Complex& StackArr::Top() & {
-    if () {
-        throw std::invalid_argument(" ");
+    if (IsEmpty()) {
+        throw std::logic_error("Stack is empty");
     }
     return data_[i_top_];
 }
 
 [[nodiscard]] const Complex& StackArr::Top() const & {
-    if () {
-        throw std::invalid_argument(" ");
+    if (IsEmpty()) {
+        throw std::logic_error("Stack is empty");
     }
     return data_[i_top_];
 }

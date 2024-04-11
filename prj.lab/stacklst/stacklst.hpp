@@ -10,13 +10,13 @@ class StackLst final {
 public:
     StackLst() = default;
 
-    StackLst(const StackLst& src);
+    StackLst(const StackLst& src); //?
 
     StackLst(StackLst&& src) noexcept;
 
-    ~StackLst() = default;
+    ~StackLst();
 
-    StackLst& operator=(const StackLst& src);
+    StackLst& operator=(const StackLst& src) noexcept;
 
     StackLst& operator=(StackLst&& src) noexcept;
 
@@ -24,7 +24,7 @@ public:
 
     void Pop() noexcept;
 
-    void Push(const Complex& val);
+    void Push(const Complex& val) noexcept;
 
     [[nodiscard]] Complex& Top() &;
 

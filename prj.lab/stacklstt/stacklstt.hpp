@@ -1,3 +1,9 @@
+#pragma once
+#ifndef STACKLSTT_STACKLSTT_HPP_202404
+#define STACKLSTT_STACKLSTT_HPP_202404
+
+#include <cstddef>
+
 template <typename T>
 class StackLstT {
 public:
