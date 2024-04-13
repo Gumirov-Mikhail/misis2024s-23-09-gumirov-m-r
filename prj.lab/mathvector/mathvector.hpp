@@ -47,6 +47,7 @@ void MathVector<capacity>::push_back(const int &value) {
         }
         Newvector[size] = value;
         size++;
+        delete[] begin;
         begin = Newvector;
     }
     else {
@@ -88,6 +89,7 @@ void MathVector<capacity>::replace_at(const int &index, const int &value) {
                 Newvector[i] = *(begin + i);
             }
         }
+        delete[] begin;
         begin = Newvector;
     }
 }
