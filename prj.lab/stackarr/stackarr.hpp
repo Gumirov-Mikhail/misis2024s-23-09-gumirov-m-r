@@ -24,7 +24,7 @@ public:
 
     void Pop() noexcept;
 
-    void Push(const Complex& val) noexcept;
+    void Push(const Complex& val) ;
 
     [[nodiscard]] Complex& Top() &;
 

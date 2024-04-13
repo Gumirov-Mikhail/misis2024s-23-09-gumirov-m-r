@@ -55,7 +55,7 @@ void StackArr::Pop() noexcept {
     }
 }
 
-void StackArr::Push(const Complex& val) noexcept {
+void StackArr::Push(const Complex& val) {
     if (size_ == 0) {
         size_ = 8;
         data_ = new Complex[size_];
@@ -73,14 +73,14 @@ void StackArr::Push(const Complex& val) noexcept {
 
 [[nodiscard]] Complex& StackArr::Top() & {
     if (IsEmpty()) {
-        throw std::logic_error("Stack is empty");
+        throw std::logic_error("StackArr - try get top from empty stack.");
     }
     return data_[i_top_];
 }
 
 [[nodiscard]] const Complex& StackArr::Top() const & {
     if (IsEmpty()) {
-        throw std::logic_error("Stack is empty");
+        throw std::logic_error("StackArr - try get top from empty stack.");
     }
     return data_[i_top_];
 }
