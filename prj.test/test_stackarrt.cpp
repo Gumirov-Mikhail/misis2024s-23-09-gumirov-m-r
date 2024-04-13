@@ -118,7 +118,7 @@ TEST_CASE_TEMPLATE("StackArrT - Swap and Merge", T, int, float, double, long lon
     }
 }
 
-TEST_CASE_TEMPLATE("StackArr - Compare", T, int, float, double, long long) {
+TEST_CASE_TEMPLATE("StackArrT - Compare", T, int, float, double, long long) {
     SUBCASE("Compare with not empty stack") {
         StackArrT<T> st1 {5, 4, 3};
         StackArrT<T> st2 {5, 4, 3};
