@@ -1,8 +1,8 @@
-#include <stackarr/stackarr.hpp>
-
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
 #include "doctest.h"
+
+#include <stackarr/stackarr.hpp>
 
 TEST_CASE("StackArr - Constructors") {
     SUBCASE("Constructor default") {
@@ -85,7 +85,7 @@ TEST_CASE("StackArr - Assignment") {
     SUBCASE("Assignment with copy") {
         StackArr st1;
         st1.Push(Complex(1, 1));
-        st1.Push(Complex(2,3));
+        st1.Push(Complex(2, 3));
         st1.Push(Complex(5, 6));
         StackArr st2;
         st2 = st1;
@@ -100,7 +100,7 @@ TEST_CASE("StackArr - Assignment") {
         StackArr st3;
         StackArr st4;
         st4.Push(Complex(1, 1));
-        st4.Push(Complex(2,3));
+        st4.Push(Complex(2, 3));
         st4.Push(Complex(5, 6));
         st4 = st3;
         CHECK(st3.IsEmpty() == true);
@@ -111,7 +111,7 @@ TEST_CASE("StackArr - Assignment") {
     SUBCASE("Assignment with move") {
         StackArr st1;
         st1.Push(Complex(1, 1));
-        st1.Push(Complex(2,3));
+        st1.Push(Complex(2, 3));
         st1.Push(Complex(5, 6));
         StackArr st2;
         st2 = std::move(st1);
@@ -125,7 +125,7 @@ TEST_CASE("StackArr - Assignment") {
         StackArr st3;
         StackArr st4;
         st4.Push(Complex(1, 1));
-        st4.Push(Complex(2,3));
+        st4.Push(Complex(2, 3));
         st4.Push(Complex(5, 6));
         st3 = std::move(st4);
         CHECK(st3.IsEmpty() == false);
