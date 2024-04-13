@@ -6,7 +6,7 @@ StackLst::StackLst(const StackLst& src) {
     if (!src.IsEmpty()) {
         Node* temp = new Node {src.head_->val, nullptr};
         head_ = temp;
-        Node* p_src = src.head_;
+        Node* p_src = src.head_->next;
         Node* p_cur = temp;
         while (p_src != nullptr) {
             temp = new Node {p_src->val, nullptr};
@@ -33,7 +33,7 @@ StackLst& StackLst::operator=(const StackLst& src) {
             Node* temp = new Node {src.head_->val, nullptr};
             head_ = temp;
             Node* p_cur = temp;
-            Node* p_src = src.head_;
+            Node* p_src = src.head_->next;
             while (p_src != nullptr) {
                 temp = new Node {p_src->val, nullptr};
                 p_cur->next = temp;
@@ -67,13 +67,8 @@ void StackLst::Pop() noexcept {
 }
 
 void StackLst::Push(const Complex& val) {
-    if (head_ == nullptr) {
-        head_ = new Node {val, nullptr};
-    }
-    else {
-        Node* temp = new Node {val, head_};
-        head_ = temp;
-    }
+    Node* temp = new Node {val, head_};
+    head_ = temp;
 }
 
 [[nodiscard]] Complex& StackLst::Top() & {
