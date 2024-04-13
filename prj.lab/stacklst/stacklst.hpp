@@ -14,9 +14,9 @@ public:
 
     StackLst(StackLst&& src) noexcept;
 
-    ~StackLst();
+    ~StackLst() = default;
 
-    StackLst& operator=(const StackLst& src) noexcept;
+    StackLst& operator=(const StackLst& src); //?
 
     StackLst& operator=(StackLst&& src) noexcept;
 
@@ -24,7 +24,7 @@ public:
 
     void Pop() noexcept;
 
-    void Push(const Complex& val) noexcept;
+    void Push(const Complex& val);
 
     [[nodiscard]] Complex& Top() &;
 

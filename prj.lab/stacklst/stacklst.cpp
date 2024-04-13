@@ -4,7 +4,16 @@
 
 StackLst::StackLst(const StackLst& src) {
     if (!src.IsEmpty()) {
-
+        Node* temp = new Node {src.head_->val, nullptr};
+        head_ = temp;
+        Node* p_src = src.head_;
+        Node* p_cur = temp;
+        while (p_src != nullptr) {
+            temp = new Node {p_src->val, nullptr};
+            p_cur->next = temp;
+            p_src = src.head_->next;
+            p_cur = temp;
+        }
     }
 }
 
@@ -12,20 +21,26 @@ StackLst::StackLst(StackLst&& src) noexcept {
     std::swap(head_, src.head_);
 }
 
-StackLst::~StackLst() {
-    while (head_ != nullptr) {
-        Node* temp = head_;
-        delete temp;
-        head_ = head_->next;
-        temp = nullptr;
-    }
-    delete head_;
-    head_ = nullptr;
-}
-
-StackLst& StackLst::operator=(const StackLst& src) noexcept {
+StackLst& StackLst::operator=(const StackLst& src) {
     if (this != &src) {
-
+        Node* temp = head_;
+        while (temp != nullptr) {
+            head_ = head_->next;
+            delete temp;
+            temp = head_;
+        }
+        if (!src.IsEmpty()) {
+            Node* temp = new Node {src.head_->val, nullptr};
+            head_ = temp;
+            Node* p_cur = temp;
+            Node* p_src = src.head_;
+            while (p_src != nullptr) {
+                temp = new Node {p_src->val, nullptr};
+                p_cur->next = temp;
+                p_src = src.head_->next;
+                p_cur = temp;
+            }
+        }
     }
     return *this;
 }
@@ -43,30 +58,34 @@ StackLst& StackLst::operator=(StackLst&& src) noexcept {
 }
 
 void StackLst::Pop() noexcept {
-    if (!IsEmpty()) {
-
+    if (head_ != nullptr) {
+        Node* temp = head_;
+        head_ = head_->next;
+        delete temp;
+        temp = nullptr;
     }
-
 }
 
-void StackLst::Push(const Complex& val) noexcept {
-    Node* newnode = new Node(val);
-    newnode->next = head_;
-    head_ = newnode;
-    newnode = nullptr;
-    head_ = new Node{val, head_};
+void StackLst::Push(const Complex& val) {
+    if (head_ == nullptr) {
+        head_ = new Node {val, nullptr};
+    }
+    else {
+        Node* temp = new Node {val, head_};
+        head_ = temp;
+    }
 }
 
 [[nodiscard]] Complex& StackLst::Top() & {
     if (IsEmpty()) {
-        throw std::logic_error("StackLstT - try get top form empty stack.");
+        throw std::logic_error("StackLst - try get top from empty stack.");
     }
     return head_->val;
 }
 
 [[nodiscard]] const Complex& StackLst::Top() const & {
     if (IsEmpty()) {
-        throw std::logic_error("StackLstT - try get top form empty stack.");
+        throw std::logic_error("StackLst - try get top from empty stack.");
     }
     return head_->val;
 }
