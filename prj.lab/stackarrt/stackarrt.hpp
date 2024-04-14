@@ -75,10 +75,10 @@ void StackArrT<T>::push(const T& value) {
         data_ = new T [size_];
     }
     else if (i_top_ + 1 >= size_) {
-        T* newdata_ = new T [size_ * 2];
-        std::copy(data_, data_ + size_, newdata_);
+        T* temp = new T [size_ * 2];
+        std::copy(data_, data_ + size_, temp);
         delete [] data_;
-        data_ = newdata_;
+        data_ = temp;
         size_ *= 2;
     }
     i_top_++;
@@ -103,17 +103,17 @@ T& StackArrT<T>::top() const {
 
 template <typename T>
 void StackArrT<T>::swap(StackArrT<T>& other) {
-    T* newdata_ = other.data_;
-    std::ptrdiff_t newsize_ = other.size_;
-    std::ptrdiff_t newi_top_ = other.i_top_;
+    T* temp_data_ = other.data_;
+    std::ptrdiff_t temp_size_ = other.size_;
+    std::ptrdiff_t temp_i_top_ = other.i_top_;
 
     other.data_ = data_;
     other.i_top_ = i_top_;
     other.size_ = size_;
 
-    data_ = newdata_;
-    size_ = newsize_;
-    i_top_ = newi_top_;
+    data_ = temp_data_;
+    size_ = temp_size_;
+    i_top_ = temp_i_top_;
 }
 
 template <typename T>
@@ -172,9 +172,9 @@ StackArrT<T>& StackArrT<T>::operator=(const StackArrT<T>& rhs) noexcept {
         i_top_ = rhs.i_top_;
         delete [] data_;
         if (!rhs.empty()) {
-            T* newdata_ = new T [size_];
-            std::copy(rhs.data_, rhs.data_ + size_, newdata_);
-            data_ = newdata_;
+            T* temp = new T [size_];
+            std::copy(rhs.data_, rhs.data_ + size_, temp);
+            data_ = temp;
         }
         else {
             data_ = nullptr;
