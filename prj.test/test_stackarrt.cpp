@@ -97,24 +97,32 @@ TEST_CASE_TEMPLATE("StackArrT - Swap and Merge", T, int, float, double, long lon
         CHECK((st2 != st3) == true);
     }
     SUBCASE("Merge") {
-        StackArrT<T> st1 {5, 4, 3};
-        StackArrT<T> st2 {6, 7, 8};
-        StackArrT<T> st_merge {5, 4, 3, 6, 7, 8};
-        st1.merge(st2);
-        CHECK((st1 == st_merge) == true);
-
-        StackArrT<T> st3 {5};
-        StackArrT<T> st4 {4, 3, 6, 7, 8};
-        st3.merge(st4);
-        CHECK((st3 == st_merge) == true);
-
-        StackArrT<T> st5 {5, 4, 3, 6, 7};
-        StackArrT<T> st6 {8};
-        st5.merge(st6);
-        CHECK((st5 == st_merge) == true);
-    }
-    SUBCASE("Merge with empty stack") {
-
+        StackArrT<T> st_merge{5, 4, 3, 6, 7, 8};
+        StackArrT<T> st_merge_empty;
+        SUBCASE("Default Merge") {
+            StackArrT<T> st1{5, 4, 3};
+            StackArrT<T> st2{6, 7, 8};
+            st1.merge(st2);
+            CHECK((st1 == st_merge) == true);
+        }
+        SUBCASE("Merge empty and full") {
+            StackArrT<T> st3;
+            StackArrT<T> st4{5, 4, 3, 6, 7, 8};
+            st3.merge(st4);
+            CHECK((st3 == st_merge) == true);
+        }
+        SUBCASE("Merge full and empty") {
+            StackArrT<T> st5{5, 4, 3, 6, 7, 8};
+            StackArrT<T> st6;
+            st5.merge(st6);
+            CHECK((st5 == st_merge) == true);
+        }
+        SUBCASE("Merge empty and empty") {
+            StackArrT<T> st7;
+            StackArrT<T> st8;
+            st7.merge(st8);
+            CHECK((st7 == st_merge_empty) == true);
+        }
     }
 }
 
