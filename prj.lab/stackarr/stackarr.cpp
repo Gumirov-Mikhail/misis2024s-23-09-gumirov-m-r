@@ -61,10 +61,10 @@ void StackArr::Push(const Complex& val) {
         data_ = new Complex[size_];
     }
     else if (i_top_ + 1 >= size_) {
-        Complex* Newdata = new Complex[size_ * 2];
-        std::copy(data_, data_ + size_, Newdata);
+        Complex* temp = new Complex[size_ * 2];
+        std::copy(data_, data_ + size_, temp);
         delete [] data_;
-        data_ = Newdata;
+        data_ = temp;
         size_ *= 2;
     }
     i_top_++;
