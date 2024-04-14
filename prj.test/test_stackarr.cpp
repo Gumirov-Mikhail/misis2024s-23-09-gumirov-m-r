@@ -96,7 +96,8 @@ TEST_CASE("StackArr - Assignment") {
         CHECK(st2.Top() == Complex(2, 3));
         st2.Clear();
         CHECK(st2.IsEmpty() == true);
-
+    }
+    SUBCASE("Assignment with copy empty stack") {
         StackArr st3;
         StackArr st4;
         st4.Push(Complex(1, 1));
@@ -122,6 +123,8 @@ TEST_CASE("StackArr - Assignment") {
         CHECK(st2.Top() == Complex(2, 3));
         st2.Clear();
         CHECK(st2.IsEmpty() == true);
+    }
+    SUBCASE("Assignment with move empty stack") {
         StackArr st3;
         StackArr st4;
         st4.Push(Complex(1, 1));
