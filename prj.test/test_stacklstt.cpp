@@ -97,24 +97,32 @@ TEST_CASE_TEMPLATE("StackLstT - Swap and Merge", T, int, float, double, long lon
         CHECK((st2 != st3) == true);
     }
     SUBCASE("Merge") {
-        StackLstT<T> st1 {5, 4, 3};
-        StackLstT<T> st2 {6, 7, 8};
         StackLstT<T> st_merge {5, 4, 3, 6, 7, 8};
-        st1.merge(st2);
-        CHECK((st1 == st_merge) == true);
-
-        StackLstT<T> st3 {5};
-        StackLstT<T> st4 {4, 3, 6, 7, 8};
-        st3.merge(st4);
-        CHECK((st3 == st_merge) == true);
-
-        StackLstT<T> st5 {5, 4, 3, 6, 7};
-        StackLstT<T> st6 {8};
-        st5.merge(st6);
-        CHECK((st5 == st_merge) == true);
-    }
-    SUBCASE("Merge with empty stack") {
-
+        StackLstT<T> st_merge_empty;
+        SUBCASE("Default Merge") {
+            StackLstT<T> st1 {5, 4, 3};
+            StackLstT<T> st2 {6, 7, 8};
+            st1.merge(st2);
+            CHECK((st1 == st_merge) == true);
+        }
+        SUBCASE("Merge empty and full") {
+            StackLstT<T> st3;
+            StackLstT<T> st4 {5, 4, 3, 6, 7, 8};
+            st3.merge(st4);
+            CHECK((st3 == st_merge) == true);
+        }
+        SUBCASE("Merge full and empty") {
+            StackLstT<T> st5{5, 4, 3, 6, 7, 8};
+            StackLstT<T> st6;
+            st5.merge(st6);
+            CHECK((st5 == st_merge) == true);
+        }
+        SUBCASE("Merge empty and empty") {
+            StackLstT<T> st7;
+            StackLstT<T> st8;
+            st7.merge(st8);
+            CHECK((st7 == st_merge_empty) == true);
+        }
     }
 }
 
@@ -145,7 +153,7 @@ TEST_CASE_TEMPLATE("StackLstT - Compare", T, int, float, double, long long) {
 
 TEST_CASE_TEMPLATE("StackLstT - Assignment", T, int, float, double, long long) {
     SUBCASE("Assignment with copy") {
-        StackLstT<T> st1 {5, 4, 3};
+        StackLstT<T> st1{5, 4, 3};
         StackLstT<T> st2;
         st2 = st1;
         CHECK(st1.empty() == false);
@@ -161,7 +169,8 @@ TEST_CASE_TEMPLATE("StackLstT - Assignment", T, int, float, double, long long) {
         st2.pop();
         CHECK(st1.empty() == false);
         CHECK(st2.empty() == true);
-
+    }
+    SUBCASE("Assignment with copy empty stack") {
         StackLstT<T> st3;
         StackLstT<T> st4 {5, 4, 3};
         st4 = st3;
@@ -171,7 +180,7 @@ TEST_CASE_TEMPLATE("StackLstT - Assignment", T, int, float, double, long long) {
         CHECK(st4.size() == 0);
     }
     SUBCASE("Assignment with move") {
-        StackLstT<T> st1 {5, 4, 3};
+        StackLstT<T> st1{5, 4, 3};
         StackLstT<T> st2;
         st2 = std::move(st1);
         CHECK(st1.empty() == true);
@@ -186,7 +195,8 @@ TEST_CASE_TEMPLATE("StackLstT - Assignment", T, int, float, double, long long) {
         st2.pop();
         CHECK(st1.empty() == true);
         CHECK(st2.empty() == true);
-
+    }
+    SUBCASE("Assignment with move empty stack") {
         StackLstT<T> st3;
         StackLstT<T> st4 {5, 4, 3};
         st4 = std::move(st3);

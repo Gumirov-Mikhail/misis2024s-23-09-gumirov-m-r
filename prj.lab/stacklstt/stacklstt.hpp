@@ -67,6 +67,9 @@ StackLstT<T>::StackLstT(const StackLstT<T> &other) {
             p_cur = temp;
         }
     }
+    else {
+        head_ = nullptr;
+    }
 }
 
 template<typename T>
@@ -77,7 +80,7 @@ StackLstT<T>::StackLstT(StackLstT<T> &&other) {
 template<typename T>
 StackLstT<T>::StackLstT(const std::initializer_list<T> &list) {
     T* mas = new T [list.size()];
-    std::copy(list.end(), list.begin(), mas);
+    std::reverse_copy(list.begin(), list.end(), mas);
     Node* temp = new Node {mas[0], nullptr};
     head_ = temp;
     Node* p_cur = temp;
@@ -122,15 +125,17 @@ void StackLstT<T>::swap(StackLstT<T> &other) {
 
 template<typename T>
 void StackLstT<T>::merge(StackLstT<T> &other) {
-    if (other.empty()) {
+    if (empty()) {
         this->swap(other);
     }
-    else {
-        Node* temp = head_;
+    else if (!other.empty()) {
+        Node* temp = other.head_;
         while (temp->next != nullptr) {
-            head_ = head_->next;
+            temp = temp->next;
         }
-        temp->next = other.head_;
+        temp->next = head_;
+        head_ = other.head_;
+        other.head_ = nullptr;
     }
 }
 
@@ -190,12 +195,18 @@ StackLstT<T> &StackLstT<T>::operator=(const StackLstT<T> &rhs) noexcept {
                 p_cur = temp;
             }
         }
+        else {
+            head_ = nullptr;
+        }
     }
+    return *this;
 }
 
 template<typename T>
 StackLstT<T> &StackLstT<T>::operator=(StackLstT<T> &&other) {
-    this->swap(other);
+    if (this != &other) {
+        this->swap(other);
+    }
     return *this;
 }
 
