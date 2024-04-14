@@ -49,9 +49,8 @@ template <typename T>
 StackArrT<T>::StackArrT(const StackArrT<T>& other)
     : i_top_(other.i_top_), size_(other.size_) {
     if (!other.empty()) {
-        delete [] data_;
         data_ = new T [size_];
-        std::copy(other.data_, other.data_ + size_, data_);
+        std::copy(other.data_, other.data_ + i_top_ + 1, data_);
     }
 }
 
@@ -76,7 +75,7 @@ void StackArrT<T>::push(const T& value) {
     }
     else if (i_top_ + 1 >= size_) {
         T* temp = new T [size_ * 2];
-        std::copy(data_, data_ + size_, temp);
+        std::copy(data_, data_ + i_top_ + 1, temp);
         delete [] data_;
         data_ = temp;
         size_ *= 2;
@@ -171,13 +170,11 @@ StackArrT<T>& StackArrT<T>::operator=(const StackArrT<T>& rhs) noexcept {
         size_ = rhs.size_;
         i_top_ = rhs.i_top_;
         delete [] data_;
+        data_ = nullptr;
         if (!rhs.empty()) {
             T* temp = new T [size_];
-            std::copy(rhs.data_, rhs.data_ + size_, temp);
+            std::copy(rhs.data_, rhs.data_ + i_top_ + 1, temp);
             data_ = temp;
-        }
-        else {
-            data_ = nullptr;
         }
     }
     return *this;
@@ -185,7 +182,9 @@ StackArrT<T>& StackArrT<T>::operator=(const StackArrT<T>& rhs) noexcept {
 
 template <typename T>
 StackArrT<T>& StackArrT<T>::operator=(StackArrT<T>&& other) {
-    swap(other);
+    if (this != &other) {
+        swap(other);
+    }
     return *this;
 }
 

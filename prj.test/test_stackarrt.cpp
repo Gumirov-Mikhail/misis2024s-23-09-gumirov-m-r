@@ -145,7 +145,7 @@ TEST_CASE_TEMPLATE("StackArrT - Compare", T, int, float, double, long long) {
 
 TEST_CASE_TEMPLATE("StackArrT - Assignment", T, int, float, double, long long) {
     SUBCASE("Assignment with copy") {
-        StackArrT<T> st1 {5, 4, 3};
+        StackArrT<T> st1{5, 4, 3};
         StackArrT<T> st2;
         st2 = st1;
         CHECK(st1.empty() == false);
@@ -161,7 +161,8 @@ TEST_CASE_TEMPLATE("StackArrT - Assignment", T, int, float, double, long long) {
         st2.pop();
         CHECK(st1.empty() == false);
         CHECK(st2.empty() == true);
-
+    }
+    SUBCASE("Assignment with copy empty stack") {
         StackArrT<T> st3;
         StackArrT<T> st4 {5, 4, 3};
         st4 = st3;
@@ -171,7 +172,7 @@ TEST_CASE_TEMPLATE("StackArrT - Assignment", T, int, float, double, long long) {
         CHECK(st4.size() == 0);
     }
     SUBCASE("Assignment with move") {
-        StackArrT<T> st1 {5, 4, 3};
+        StackArrT<T> st1{5, 4, 3};
         StackArrT<T> st2;
         st2 = std::move(st1);
         CHECK(st1.empty() == true);
@@ -186,7 +187,8 @@ TEST_CASE_TEMPLATE("StackArrT - Assignment", T, int, float, double, long long) {
         st2.pop();
         CHECK(st1.empty() == true);
         CHECK(st2.empty() == true);
-
+    }
+    SUBCASE("Assignment with move empty stack") {
         StackArrT<T> st3;
         StackArrT<T> st4 {5, 4, 3};
         st4 = std::move(st3);
