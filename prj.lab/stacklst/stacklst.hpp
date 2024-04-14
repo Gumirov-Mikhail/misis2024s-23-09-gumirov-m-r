@@ -10,13 +10,13 @@ class StackLst final {
 public:
     StackLst() = default;
 
-    StackLst(const StackLst& src); //?
+    StackLst(const StackLst& src);
 
     StackLst(StackLst&& src) noexcept;
 
     ~StackLst() = default;
 
-    StackLst& operator=(const StackLst& src); //?
+    StackLst& operator=(const StackLst& src);
 
     StackLst& operator=(StackLst&& src) noexcept;
 

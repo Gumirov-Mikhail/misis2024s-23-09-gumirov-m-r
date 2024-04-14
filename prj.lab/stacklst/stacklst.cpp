@@ -1,7 +1,7 @@
 #include <stacklst/stacklst.hpp>
 
+#include <algorithm>
 #include <stdexcept>
-
 StackLst::StackLst(const StackLst& src) {
     if (!src.IsEmpty()) {
         Node* temp = new Node {src.head_->val, nullptr};
@@ -9,11 +9,14 @@ StackLst::StackLst(const StackLst& src) {
         Node* p_src = src.head_->next;
         Node* p_cur = temp;
         while (p_src != nullptr) {
-            temp = new Node {p_src->val, nullptr};
+            Node* temp = new Node {p_src->val, nullptr};
             p_cur->next = temp;
-            p_src = src.head_->next;
+            p_src = p_src->next;
             p_cur = temp;
         }
+    }
+    else {
+        head_ = nullptr;
     }
 }
 
@@ -32,21 +35,26 @@ StackLst& StackLst::operator=(const StackLst& src) {
         if (!src.IsEmpty()) {
             Node* temp = new Node {src.head_->val, nullptr};
             head_ = temp;
-            Node* p_cur = temp;
             Node* p_src = src.head_->next;
+            Node* p_cur = temp;
             while (p_src != nullptr) {
-                temp = new Node {p_src->val, nullptr};
+                Node* temp = new Node {p_src->val, nullptr};
                 p_cur->next = temp;
-                p_src = src.head_->next;
+                p_src = p_src->next;
                 p_cur = temp;
             }
+        }
+        else {
+            head_ = nullptr;
         }
     }
     return *this;
 }
 
 StackLst& StackLst::operator=(StackLst&& src) noexcept {
-    std::swap(head_, src.head_);
+    if (this != &src) {
+        std::swap(head_, src.head_);
+    }
     return *this;
 }
 

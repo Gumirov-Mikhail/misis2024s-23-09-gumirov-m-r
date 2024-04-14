@@ -94,7 +94,8 @@ TEST_CASE("StackLst - Assignment") {
         CHECK(st2.Top() == Complex(2, 3));
         st2.Clear();
         CHECK(st2.IsEmpty() == true);
-
+    }
+    SUBCASE("Assignment with copy empty stack") {
         StackLst st3;
         StackLst st4;
         st4.Push(Complex(1, 1));
@@ -103,8 +104,8 @@ TEST_CASE("StackLst - Assignment") {
         st4 = st3;
         CHECK(st3.IsEmpty() == true);
         CHECK(st4.IsEmpty() == true);
-        CHECK_THROWS_WITH(st3.Top(), "StackArr - try get top from empty stack.");
-        CHECK_THROWS_WITH(st4.Top(), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(st3.Top(), "StackLst - try get top from empty stack.");
+        CHECK_THROWS_WITH(st4.Top(), "StackLst - try get top from empty stack.");
     }
     SUBCASE("Assignment with move") {
         StackLst st1;
@@ -120,6 +121,8 @@ TEST_CASE("StackLst - Assignment") {
         CHECK(st2.Top() == Complex(2, 3));
         st2.Clear();
         CHECK(st2.IsEmpty() == true);
+    }
+    SUBCASE("Assignment with move empty stack") {
         StackLst st3;
         StackLst st4;
         st4.Push(Complex(1, 1));
@@ -129,6 +132,6 @@ TEST_CASE("StackLst - Assignment") {
         CHECK(st3.IsEmpty() == false);
         CHECK(st4.IsEmpty() == true);
         CHECK(st3.Top() == Complex(5,6));
-        CHECK_THROWS_WITH(st4.Top(), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(st4.Top(), "StackLst - try get top from empty stack.");
     }
 }
