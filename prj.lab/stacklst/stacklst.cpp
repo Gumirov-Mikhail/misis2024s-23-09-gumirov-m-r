@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <stdexcept>
+
 StackLst::StackLst(const StackLst& src) {
     if (!src.IsEmpty()) {
         Node* temp = new Node {src.head_->val, nullptr};
@@ -58,7 +59,7 @@ StackLst& StackLst::operator=(StackLst&& src) noexcept {
     return *this;
 }
 
-[[nodiscard]] bool StackLst::IsEmpty() const noexcept {
+bool StackLst::IsEmpty() const noexcept {
     if (head_ == nullptr) {
         return true;
     }
@@ -79,14 +80,14 @@ void StackLst::Push(const Complex& val) {
     head_ = temp;
 }
 
-[[nodiscard]] Complex& StackLst::Top() & {
+Complex& StackLst::Top() & {
     if (IsEmpty()) {
         throw std::logic_error("StackLst - try get top from empty stack.");
     }
     return head_->val;
 }
 
-[[nodiscard]] const Complex& StackLst::Top() const & {
+const Complex& StackLst::Top() const & {
     if (IsEmpty()) {
         throw std::logic_error("StackLst - try get top from empty stack.");
     }
