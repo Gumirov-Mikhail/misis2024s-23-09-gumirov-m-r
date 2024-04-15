@@ -1,126 +1,206 @@
-#ifndef GUMIROV_M_R_23_09_MATHVECTOR_HPP
-#define GUMIROV_M_R_23_09_MATHVECTOR_HPP
+#pragma once
+#ifndef MATHVECTOR_MATHVECTOR_HPP_202404
+#define MATHVECTOR_MATHVECTOR_HPP_202404
 
+#include <algorithm>
 #include <stdexcept>
+#include <cstddef>
+#include <initializer_list>
 
 template <int capacity>
 class MathVector {
 public:
     MathVector();
+    MathVector(const MathVector &rhs);
+    MathVector(MathVector &&rhs) noexcept;
+    MathVector(const std::initializer_list<int> &list);
+    ~MathVector();
 
     void push_back(const int &value);
-
-    int at(const int &index);
-
+    [[nodiscard]] int at(const int &index) const;
     void replace_at(const int &index, const int &value);
+    void swap(MathVector &rhs);
 
-    int getSize();
+    [[nodiscard]] int getSize() const noexcept;
+    [[nodiscard]] int getFront() const;
+    [[nodiscard]] int getBack() const;
+    [[nodiscard]] bool empty() const noexcept;
+    void Clear() noexcept;
 
-    int getFront();
+    MathVector& operator=(const MathVector &rhs);
+    MathVector& operator=(MathVector &&rhs) noexcept;
 
-    int getBack();
+    bool operator==(const MathVector &other) noexcept; //сравниваем равно ли количество их заполненных элементов, затем сравниваем каждый элемент
+    bool operator!=(const MathVector &other) noexcept; //реализация через ==
 
-    bool operator==(const MathVector &other); //сравниваем равно ли количество их заполненных элементов, затем сравниваем каждый элемент
-    bool operator!=(const MathVector &other); //реализация через ==
-
-    bool empty();
-
-    ~MathVector();
 private:
-    int* begin = nullptr;
-    int size = 0;
+    int* begin = nullptr; //указатель на первый элемент массива
+    int size = 0; //кол-во заполненных элементов
 };
-
-#include <mathvector/mathvector.hpp>
 
 template <int capacity>
 MathVector<capacity>::MathVector() {
     begin = new int [capacity];
 }
 
-template <int capacity>
-void MathVector<capacity>::push_back(const int &value) {
-    if (size < capacity) {
-        int *Newvector = new int[capacity];
-        for (int i = 0; i < size; i++) {
-            Newvector[i] = *(begin + i);
-        }
-        Newvector[size] = value;
-        size++;
-        delete[] begin;
-        begin = Newvector;
+template<int capacity>
+MathVector<capacity>::MathVector(const MathVector &rhs) {
+    if (!rhs.empty()) {
+        size = rhs.size;
+        begin = new int [capacity];
+        std::copy(rhs.begin, rhs.begin + size, begin);
     }
     else {
-        throw std::invalid_argument("Vector is full");
+        begin = nullptr;
+    }
+}
+
+template<int capacity>
+MathVector<capacity>::MathVector(MathVector &&rhs) noexcept {
+    this->swap(rhs);
+}
+
+template<int capacity>
+MathVector<capacity>::MathVector(const std::initializer_list<int> &list) { //исправить и убрать ошибку
+    size = list.size();
+    begin = new int [capacity];
+    if (size > capacity) {
+        throw std::logic_error("MathVector - try initializer for full vector.");
+    }
+    else {
+        std::copy(list.begin(), list.end(), begin);
     }
 }
 
 template <int capacity>
-bool MathVector<capacity>::empty() {
+MathVector<capacity>::~MathVector() {
+    size = 0;
+    delete [] begin;
+    begin = nullptr;
+}
+
+template <int capacity>
+void MathVector<capacity>::push_back(const int &value) {
+    if (size < capacity) {
+        int* temp = new int[capacity];
+        for (int i = 0; i < size; i++) {
+            temp[i] = begin[i];
+        }
+        temp[size] = value;
+        size++;
+        delete[] begin;
+        begin = temp;
+    }
+    else {
+        throw std::logic_error("MathVector - try push for full vector.");
+    }
+}
+
+template <int capacity>
+int MathVector<capacity>::at(const int &index) const {
+    if (empty()) {
+        throw std::logic_error("MathVector - try get at from empty vector.");
+    }
+    if (index >= size) {
+        throw std::logic_error("MathVector - try get at from outside the vector.");
+    }
+    return begin[index];
+}
+
+template <int capacity>
+void MathVector<capacity>::replace_at(const int &index, const int &value) {
+    if (empty()) {
+        throw std::logic_error("MathVector - try replace_at from empty vector.");
+    }
+    else if (index >= size) {
+        throw std::logic_error("MathVector - try replace_at from outside the vector.");
+    }
+    else {
+        int *temp = new int[capacity];
+        for (int i = 0; i < size; i++) {
+            if (i == index) {
+                temp[i] = value;
+            }
+            else {
+                temp[i] = begin[i];
+            }
+        }
+        delete[] begin;
+        begin = temp;
+    }
+}
+
+
+template<int capacity>
+void MathVector<capacity>::swap(MathVector &rhs) {
+    std::swap(size, rhs.size);
+    std::swap(begin, rhs.begin);
+}
+
+template <int capacity>
+int MathVector<capacity>::getSize() const noexcept {
+    return size;
+}
+
+template <int capacity>
+int MathVector<capacity>::getFront() const {
+    if (empty()) {
+        throw std::logic_error("MathVector - try get at from empty vector.");
+    }
+    else {
+        return *begin;
+    }
+}
+
+template <int capacity>
+int MathVector<capacity>::getBack() const {
+    if (empty()) {
+        throw std::logic_error("MathVector - try get at from empty vector.");
+    }
+    else {
+        return begin[size-1];
+    }
+}
+
+template <int capacity>
+bool MathVector<capacity>::empty() const noexcept {
     if (size == 0) {
         return true;
     }
     return false;
 };
 
-template <int capacity>
-int MathVector<capacity>::at(const int &index) {
-    if (empty()) {
-        throw std::invalid_argument("Vector is empty");
-    }
-    if (index > size) {
-        throw std::invalid_argument("Obrashchenie k pustomy elementy");
-    }
-    return *(begin + index);
+template<int capacity>
+void MathVector<capacity>::Clear() noexcept {
+    size = 0;
+    delete [] begin;
+    begin = new int [capacity];
 }
 
-template <int capacity>
-void MathVector<capacity>::replace_at(const int &index, const int &value) {
-    if (empty()) {
-        throw std::invalid_argument("Vector is empty");
-    }
-    else {
-        int *Newvector = new int[capacity];
-        for (int i = 0; i < capacity; i++) {
-            if (i == index) {
-                Newvector[i] = value;
-            }
-            else {
-                Newvector[i] = *(begin + i);
-            }
+template<int capacity>
+MathVector<capacity>& MathVector<capacity>::operator=(const MathVector &rhs) {
+    if (this != &rhs) {
+        size = rhs.size;
+        delete [] begin;
+        if (!rhs.empty()) {
+            begin = new int [capacity];
+            std::copy(rhs.begin, rhs.begin + size, begin);
         }
-        delete[] begin;
-        begin = Newvector;
+        else {
+            begin = nullptr;
+        }
     }
+    return *this;
+}
+
+template<int capacity>
+MathVector<capacity>& MathVector<capacity>::operator=(MathVector &&rhs) noexcept {
+    this->swap( rhs);
+    return *this;
 }
 
 template <int capacity>
-int MathVector<capacity>::getSize(){
-    return size;
-}
-
-template <int capacity>
-int MathVector<capacity>::getFront() {
-    if (empty()) {
-        throw std::invalid_argument("Vector is empty");
-    }
-    else {
-        return *(begin);
-    }
-}
-
-template <int capacity>
-int MathVector<capacity>::getBack() {
-    if (empty()) {
-        throw std::invalid_argument("Vector is empty");
-    }
-    else {
-        return *(begin+size-1);
-    }
-}
-
-template <int capacity>
-bool MathVector<capacity>::operator==(const MathVector &other) {
+bool MathVector<capacity>::operator==(const MathVector &other) noexcept {
     if (size == other.size) {
         for (int i = 0; i < size; i++) {
             if (begin[i] != other.begin[i]) {
@@ -133,13 +213,8 @@ bool MathVector<capacity>::operator==(const MathVector &other) {
 }
 
 template <int capacity>
-bool MathVector<capacity>::operator!=(const MathVector &other) {
+bool MathVector<capacity>::operator!=(const MathVector &other) noexcept {
     return !(operator==(other));
 }
 
-template <int capacity>
-MathVector<capacity>::~MathVector() {
-    delete [] begin;
-    begin = nullptr;
-}
 #endif
