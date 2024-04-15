@@ -18,3 +18,6 @@ target_link_libraries(test_stackarrt stackarrt)
 
 add_executable(test_stacklstt test_stacklstt.cpp)
 target_link_libraries(test_stacklstt stacklstt)
+
+add_executable(test_dynarr test_dynarr.cpp)
+target_link_libraries(test_dynarr dynarr)
