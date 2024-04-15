@@ -35,5 +35,6 @@
 *build
 *bin.dbg
 *cmake-build-debug
+*status.logs
 *status.md
 *.idea
