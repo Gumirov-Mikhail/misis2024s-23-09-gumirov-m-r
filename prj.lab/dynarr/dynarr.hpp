@@ -9,18 +9,18 @@ class DynArr {
 public:
     DynArr() = default;
 
-    DynArr(const DynArr&);
+    DynArr(const DynArr& src);
 
-    DynArr(DynArr&&) noexcept;
+    DynArr(DynArr&& src) noexcept;
 
     //! \param size - начальный размер, 0 < size
     DynArr(const std::ptrdiff_t size);
 
     ~DynArr() = default;
 
-    DynArr& operator=(const DynArr&);
+    DynArr& operator=(const DynArr& src);
 
-    DynArr& operator=(DynArr&&) noexcept;
+    DynArr& operator=(DynArr&& src) noexcept;
 
     [[nodiscard]] std::ptrdiff_t Size() const noexcept { return size_; }
 
@@ -34,7 +34,7 @@ public:
 private:
     std::ptrdiff_t capacity_ = 0;         //!< размер буфера
     std::ptrdiff_t size_ = 0;             //!< число элементов в массиве
-    std::unique_ptr<float[]> data_ = 0;   //!< буфер
+    std::unique_ptr<float[]> data_ = nullptr;   //!< буфер
 };
 
 #endif
