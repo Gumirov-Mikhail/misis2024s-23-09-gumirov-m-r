@@ -1,16 +1,16 @@
-CHECK: 20240414-221459
+CHECK: 20240419-003233
 STATUS: lab complex - test-ok
 STATUS: lab complex_io - test-ok
 STATUS: lab complex_m - test-ok
 STATUS: lab rational - test-ok
 STATUS: lab rational_io - test-ok
 STATUS: lab rational_m - test-ok
-ERROR: lab dynarr - test build failed
-ERROR: lab dynarr_m - test build failed
-STATUS: lab stackarr - test-failed
+STATUS: lab dynarr - test-ok
+STATUS: lab dynarr_m - test-ok
+STATUS: lab stackarr - test-ok
 STATUS: lab stackarr_m - test-ok
-STATUS: lab stacklst - test-failed
-STATUS: lab stacklst_m - test-failed
+STATUS: lab stacklst - test-ok
+STATUS: lab stacklst_m - test-ok
 ERROR: lab queuearr - test build failed
 ERROR: lab queuearr_m - test build failed
 ERROR: lab queuelst - test build failed
