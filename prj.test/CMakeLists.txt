@@ -21,3 +21,9 @@ target_link_libraries(test_stacklstt stacklstt)
 
 add_executable(test_dynarr test_dynarr.cpp)
 target_link_libraries(test_dynarr dynarr)
+
+add_executable(test_queuearr test_queuearr.cpp)
+target_link_libraries(test_queuearr queuearr)
+
+add_executable(test_queuelst test_queuelst.cpp)
+target_link_libraries(test_queuelst queuelst)
