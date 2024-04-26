@@ -14,7 +14,7 @@ public:
 
     QueueLst(QueueLst&& src) noexcept;
 
-    ~QueueLst() = default;
+    ~QueueLst();
 
     QueueLst& operator=(const QueueLst& src);
 
