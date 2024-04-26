@@ -24,7 +24,10 @@ QueueArr& QueueArr::operator=(QueueArr&& src) noexcept {
 }
 
 bool QueueArr::IsEmpty() const noexcept {
-
+    if (tail_ == -1) {
+        return true;
+    }
+    return false;
 }
 
 void QueueArr::Pop() noexcept {

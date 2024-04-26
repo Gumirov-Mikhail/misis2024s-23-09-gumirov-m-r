@@ -61,7 +61,7 @@ MathVector<capacity>::MathVector(MathVector &&rhs) noexcept {
 }
 
 template<int capacity>
-MathVector<capacity>::MathVector(const std::initializer_list<int> &list) { //исправить и убрать ошибку
+MathVector<capacity>::MathVector(const std::initializer_list<int> &list) {
     size = list.size();
     begin = new int [capacity];
     if (size > capacity) {
