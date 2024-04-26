@@ -7,15 +7,14 @@ QueueLst::QueueLst(const QueueLst& src) {
     if (!src.IsEmpty()) {
         Node* temp = new Node {src.head_->val, nullptr};
         Node* p_src = src.head_->next;
-        Node* p_cur = temp;
+        tail_ = temp;
         head_ = temp;
         while (p_src != nullptr) {
             temp = new Node {p_src->val, nullptr};
-            p_cur->next = temp;
+            tail_->next = temp;
             p_src = p_src->next;
-            p_cur = p_cur->next;
+            tail_ = tail_->next;
         }
-        tail_ = p_cur;
     }
 }
 
@@ -39,15 +38,14 @@ QueueLst& QueueLst::operator=(const QueueLst& src) {
         if (!src.IsEmpty()) {
             Node* temp = new Node {src.head_->val, nullptr};
             Node* p_src = src.head_->next;
-            Node* p_cur = temp;
+            tail_ = temp;
             head_ = temp;
             while (p_src != nullptr) {
                 temp = new Node {p_src->val, nullptr};
-                p_cur->next = temp;
+                tail_->next = temp;
                 p_src = p_src->next;
-                p_cur = p_cur->next;
+                tail_ = tail_->next;
             }
-            tail_ = p_cur;
         }
     }
     return *this;
