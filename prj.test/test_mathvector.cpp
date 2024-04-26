@@ -5,6 +5,7 @@
 #include "doctest.h"
 
 TEST_CASE("MathVector - Constructors") {
+    int capacity = 10;
     SUBCASE("Default constructor") {
         MathVector<10> ctor;
         CHECK(ctor.empty());
