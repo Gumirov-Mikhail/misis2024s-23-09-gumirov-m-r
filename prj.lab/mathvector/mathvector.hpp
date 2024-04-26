@@ -168,7 +168,7 @@ bool MathVector<capacity>::empty() const noexcept {
         return true;
     }
     return false;
-};
+}
 
 template<int capacity>
 void MathVector<capacity>::Clear() noexcept {
