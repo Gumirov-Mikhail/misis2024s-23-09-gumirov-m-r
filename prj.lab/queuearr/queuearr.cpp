@@ -7,7 +7,7 @@ QueueArr::QueueArr(const QueueArr& src) {
 
 }
 
-QueueArr::QueueArr(QueueArr&& src) noexcept { //swaps
+QueueArr::QueueArr(QueueArr&& src) noexcept {
     std::swap(size_, src.size_);
     std::swap(data_, src.data_);
     std::swap(head_, src.head_);
@@ -15,7 +15,11 @@ QueueArr::QueueArr(QueueArr&& src) noexcept { //swaps
 }
 
 QueueArr::~QueueArr() {
-
+    delete[] data_;
+    data_ = nullptr;
+    head_ = -1;
+    tail_ = -1;
+    size_ = 0;
 }
 
 QueueArr& QueueArr::operator=(const QueueArr& src) {
@@ -41,19 +45,7 @@ void QueueArr::Pop() noexcept {
 }
 
 void QueueArr::Push(const Complex& val) {
-    if (size_ == 0) {
-        size_ = 8;
-        data_ = new Complex* [size_];
-        head_++;
-    }
-    else if (tail_ + 1 == size_) {
-        Complex* temp = nullptr;
-        for (int i = 0; i < size_; i++) {
-            temp[i] = data_[i];
-        }
-    }
-    tail_++;
-    data_[tail_] = val;
+
 }
 
 Complex& QueueArr::Top() {
@@ -75,5 +67,5 @@ void QueueArr::Clear() noexcept {
 }
 
 std::ptrdiff_t QueueArr::Count() const {
-    return size_;
+    return tail_ + 1;
 }
