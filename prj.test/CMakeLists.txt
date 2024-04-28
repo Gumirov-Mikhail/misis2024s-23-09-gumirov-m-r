@@ -30,3 +30,6 @@ target_link_libraries(test_queuelst queuelst)
 
 add_executable(test_binarysearchtree test_binarysearchtree.cpp)
 target_link_libraries(test_binarysearchtree binarysearchtree)
+
+add_executable(test_queuelstpr test_queuelstpr.cpp)
+target_link_libraries(test_queuelstpr queuelstpr)

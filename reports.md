@@ -2,6 +2,9 @@
 
 ### Выполнено:
 1) Написал QueueLst
+2) Написал BinarySearchTree, кроме метода Remove
+3) 3 задачи на codeforces
+4) 3 задачи на codeforces с прошлой недели
 
 ### Планы:
 1) 3 Задачи на codeforces
