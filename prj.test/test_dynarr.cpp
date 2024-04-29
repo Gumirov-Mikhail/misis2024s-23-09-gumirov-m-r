@@ -76,7 +76,7 @@ TEST_CASE("DynArr - Resize and Indexation") {
         CHECK_EQ(arr[0], 0);
         CHECK_EQ(arr[1], 1);
         CHECK_EQ(arr[2], 2);
-        CHECK_THROWS_WITH(arr[3], "DynArr - try get element with invalid index");
+        CHECK_THROWS_WITH((void) arr[3], "DynArr - try get element with invalid index");
     }
     SUBCASE("Resize equal size") {
         DynArr arr(size1);
@@ -90,8 +90,8 @@ TEST_CASE("DynArr - Resize and Indexation") {
     }
     SUBCASE("Resize with empty array") {
         DynArr arr;
-        CHECK_THROWS_WITH(arr.Resize(-4), "DynArr - try Resize DynArr with negative size");
-        CHECK_THROWS_WITH(arr.Resize(0), "DynArr - try Resize DynArr of zero size");
+        CHECK_THROWS_WITH(void(arr.Resize(-4)), "DynArr - try Resize DynArr with negative size");
+        CHECK_THROWS_WITH(void(arr.Resize(0)), "DynArr - try Resize DynArr of zero size");
     }
     SUBCASE("Indexation") {
         DynArr arr(size1);
@@ -107,8 +107,8 @@ TEST_CASE("DynArr - Resize and Indexation") {
     }
     SUBCASE("Indexation with empty array") {
         DynArr arr;
-        CHECK_THROWS_WITH(arr[-13], "DynArr - try get element with negative index");
-        CHECK_THROWS_WITH(arr[5], "DynArr - try get element with invalid index");
+        CHECK_THROWS_WITH((void) arr[-13], "DynArr - try get element with negative index");
+        CHECK_THROWS_WITH((void) arr[5], "DynArr - try get element with invalid index");
     }
 }
 
