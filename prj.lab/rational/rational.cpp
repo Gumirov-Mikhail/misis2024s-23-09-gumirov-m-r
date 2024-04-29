@@ -5,7 +5,7 @@
 Rational::Rational(const std::int64_t num, const std::int64_t den)
         : num_(num), den_(den) {
     if (0 == den_) {
-        throw std::invalid_argument("Zero denumenator in Rational ctor");
+        throw std::invalid_argument("Zero denominator in Rational ctor");
     }
     else {
         evkl();
