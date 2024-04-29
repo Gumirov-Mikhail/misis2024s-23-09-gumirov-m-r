@@ -33,3 +33,9 @@ target_link_libraries(test_binarysearchtree binarysearchtree)
 
 add_executable(test_queuelstpr test_queuelstpr.cpp)
 target_link_libraries(test_queuelstpr queuelstpr)
+
+add_executable(test_istackarrt test_istackarrt.cpp)
+target_link_libraries(test_istackarrt istackarrt)
+
+add_executable(test_istacklstt test_istacklstt.cpp)
+target_link_libraries(test_istacklstt istacklstt)
