@@ -79,15 +79,15 @@ TEST_CASE("StackArr - Push, Pop, Top and Clear") {
         StackArr st2(st1);
         StackArr st3(std::move(st1));
         CHECK(st1.IsEmpty());
-        CHECK_THROWS_WITH(st1.Top(), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(void(st1.Top()), "StackArr - try get top from empty stack.");
         CHECK(st2.IsEmpty());
-        CHECK_THROWS_WITH(st2.Top(), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(void(st2.Top()), "StackArr - try get top from empty stack.");
         CHECK(st3.IsEmpty());
-        CHECK_THROWS_WITH(st3.Top(), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(void(st3.Top()), "StackArr - try get top from empty stack.");
         st1.Push(ch2);
         CHECK_EQ(st1.Top(), ch2);
         st1.Pop();
-        CHECK_THROWS_WITH(st1.Top(), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(void(st1.Top()), "StackArr - try get top from empty stack.");
     }
 }
 
@@ -119,8 +119,8 @@ TEST_CASE("StackArr - Assignment") {
         st4 = st3;
         CHECK(st3.IsEmpty());
         CHECK(st4.IsEmpty());
-        CHECK_THROWS_WITH(st3.Top(), "StackArr - try get top from empty stack.");
-        CHECK_THROWS_WITH(st4.Top(), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(void(st3.Top()), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(void(st4.Top()), "StackArr - try get top from empty stack.");
     }
     SUBCASE("Assignment with move") {
         StackArr st1;
@@ -147,6 +147,6 @@ TEST_CASE("StackArr - Assignment") {
         CHECK(!st3.IsEmpty());
         CHECK(st4.IsEmpty());
         CHECK_EQ(st3.Top(), ch1);
-        CHECK_THROWS_WITH(st4.Top(), "StackArr - try get top from empty stack.");
+        CHECK_THROWS_WITH(void(st4.Top()), "StackArr - try get top from empty stack.");
     }
 }
