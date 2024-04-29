@@ -87,7 +87,7 @@ void StackArrT<T>::push(const T& value) {
 template <typename T>
 void StackArrT<T>::pop() {
     if (empty()) {
-        throw std::logic_error("StackArr - try pop from empty stack.");
+        throw std::logic_error("StackArrT - try pop from empty stack.");
     }
     i_top_--;
 }
@@ -95,7 +95,7 @@ void StackArrT<T>::pop() {
 template <typename T>
 T& StackArrT<T>::top() const {
     if (empty()) {
-        throw std::logic_error("StackArr - try get top from empty stack.");
+        throw std::logic_error("StackArrT - try get top from empty stack.");
     }
     return data_[i_top_];
 }
