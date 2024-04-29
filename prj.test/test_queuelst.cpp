@@ -78,16 +78,16 @@ TEST_CASE("QueueLst - Push, Pop, Top and Clear") {
         QueueLst Queue1;
         QueueLst Queue2(Queue1);
         QueueLst Queue3(std::move(Queue1));
-        CHECK_THROWS_WITH(Queue1.Top(), "QueueLst - try get top from empty queue");
+        CHECK_THROWS_WITH(void(Queue1.Top()), "QueueLst - try get top from empty queue");
         Queue1.Push(ch1);
         Queue1.Pop();
-        CHECK_THROWS_WITH(Queue1.Top(), "QueueLst - try get top from empty queue");
+        CHECK_THROWS_WITH(void(Queue1.Top()), "QueueLst - try get top from empty queue");
         Queue1.Push(ch1);
         Queue1.Push(ch2);
         Queue1.Clear();
-        CHECK_THROWS_WITH(Queue1.Top(), "QueueLst - try get top from empty queue");
-        CHECK_THROWS_WITH(Queue2.Top(), "QueueLst - try get top from empty queue");
-        CHECK_THROWS_WITH(Queue3.Top(), "QueueLst - try get top from empty queue");
+        CHECK_THROWS_WITH(void(Queue1.Top()), "QueueLst - try get top from empty queue");
+        CHECK_THROWS_WITH(void(Queue2.Top()), "QueueLst - try get top from empty queue");
+        CHECK_THROWS_WITH(void(Queue3.Top()), "QueueLst - try get top from empty queue");
     }
 }
 
