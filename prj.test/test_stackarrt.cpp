@@ -61,8 +61,6 @@ TEST_CASE_TEMPLATE("StackArrT - Constructors", T, TYPE_TEST) {
 
 TEST_CASE_TEMPLATE("StackArrT - Push, Pop and Top", T, TYPE_TEST) {
     int size_empty = 0;
-    T ch1 = 1;
-    T ch2 = 2;
     T ch3 = 3;
     T ch4 = 4;
     SUBCASE("Push and Pop") {
@@ -84,14 +82,14 @@ TEST_CASE_TEMPLATE("StackArrT - Push, Pop and Top", T, TYPE_TEST) {
     }
     SUBCASE("Pop and Top with empty stack") {
         StackArrT<T> st1;
-        CHECK_THROWS_WITH(st1.pop(), "StackArrT - try pop from empty stack.");
-        CHECK_THROWS_WITH(st1.top(), "StackArrT - try get top from empty stack.");
+        CHECK_THROWS_WITH(void(st1.pop()), "StackArrT - try pop from empty stack.");
+        CHECK_THROWS_WITH(void(st1.top()), "StackArrT - try get top from empty stack.");
         st1.push(ch4);
         CHECK_EQ(st1.top(), ch4);
         CHECK_EQ(st1.size(), 1);
         st1.pop();
-        CHECK_THROWS_WITH(st1.pop(), "StackArrT - try pop from empty stack.");
-        CHECK_THROWS_WITH(st1.top(), "StackArrT - try get top from empty stack.");
+        CHECK_THROWS_WITH(void(st1.pop()), "StackArrT - try pop from empty stack.");
+        CHECK_THROWS_WITH(void(st1.top()), "StackArrT - try get top from empty stack.");
     }
 }
 
@@ -178,7 +176,6 @@ TEST_CASE_TEMPLATE("StackArrT - Assignment", T, TYPE_TEST) {
     T ch1 = 5;
     T ch2 = 4;
     T ch3 = 3;
-    T ch4 = 1;
     SUBCASE("Assignment with copy") {
         StackArrT<T> st1{ch1, ch2, ch3};
         StackArrT<T> st2;
