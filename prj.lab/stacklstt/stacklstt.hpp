@@ -13,7 +13,7 @@ public:
     StackLstT();
     ~StackLstT();
     StackLstT(const StackLstT<T>& other);
-    StackLstT(StackLstT<T>&& other);
+    StackLstT(StackLstT<T>&& other) noexcept;
     StackLstT(const std::initializer_list<T>& list);
 
     void push(const T& value);
@@ -28,8 +28,8 @@ public:
     bool operator==(const StackLstT<T>& rhs) const;
     bool operator!=(const StackLstT<T>& rhs) const;
 
-    StackLstT<T>& operator=(const StackLstT<T>& rhs) noexcept;
-    StackLstT<T>& operator=(StackLstT<T>&& other);
+    StackLstT<T>& operator=(const StackLstT<T>& rhs);
+    StackLstT<T>& operator=(StackLstT<T>&& other) noexcept;
 
 private:
     struct Node {
@@ -73,7 +73,7 @@ StackLstT<T>::StackLstT(const StackLstT<T> &other) {
 }
 
 template<typename T>
-StackLstT<T>::StackLstT(StackLstT<T> &&other) {
+StackLstT<T>::StackLstT(StackLstT<T> &&other) noexcept {
     this->swap(other);
 }
 
@@ -181,7 +181,7 @@ bool StackLstT<T>::operator!=(const StackLstT<T> &rhs) const {
 }
 
 template<typename T>
-StackLstT<T> &StackLstT<T>::operator=(const StackLstT<T> &rhs) noexcept {
+StackLstT<T> &StackLstT<T>::operator=(const StackLstT<T> &rhs) {
     if (this != &rhs) {
         if (!rhs.empty()) {
             Node* temp = new Node {rhs.head_->value, nullptr};
@@ -203,7 +203,7 @@ StackLstT<T> &StackLstT<T>::operator=(const StackLstT<T> &rhs) noexcept {
 }
 
 template<typename T>
-StackLstT<T> &StackLstT<T>::operator=(StackLstT<T> &&other) {
+StackLstT<T> &StackLstT<T>::operator=(StackLstT<T> &&other) noexcept {
     if (this != &other) {
         this->swap(other);
     }
