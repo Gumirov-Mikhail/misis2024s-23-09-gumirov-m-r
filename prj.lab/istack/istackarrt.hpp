@@ -23,7 +23,7 @@ public:
         }
     }
 
-    StackArrT(StackArrT<T>&& other) {
+    StackArrT(StackArrT<T>&& other) noexcept {
         this->swap(other);
     }
 
@@ -137,27 +137,11 @@ public:
         return *this;
     }
 
-    StackArrT<T>& operator=(StackArrT<T>&& other) {
+    StackArrT<T>& operator=(StackArrT<T>&& other) noexcept {
         if (this != &other) {
             swap(other);
         }
         return *this;
-    }
-
-    const char left_brace = '[';
-    const char right_brace = ']';
-    const char comma = ',';
-
-    virtual void printToStream(std::ostream &os) const override {
-        os << left_brace;
-        T* temp = data_;
-        for (int i = i_top_; i >= 0 ; i--) {
-            if (i < i_top_) {
-                os << comma << " ";
-            }
-            os << data_[i];
-        }
-        os << right_brace;
     }
 
 private:

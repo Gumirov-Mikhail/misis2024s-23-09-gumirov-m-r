@@ -11,7 +11,7 @@ public:
         head_ = nullptr;
     }
 
-    virtual ~StackLstT() override {
+    virtual ~StackLstT() {
         Node* temp = head_;
         while (temp != nullptr) {
             head_ = head_->next;
@@ -38,7 +38,7 @@ public:
         }
     }
 
-    StackLstT(StackLstT<T>&& other) {
+    StackLstT(StackLstT<T>&& other) noexcept {
         this->swap(other);
     }
 
@@ -55,12 +55,12 @@ public:
         }
     }
 
-    virtual void push(const T& value) override {
+    virtual void push(const T& value) {
         Node* temp = new Node {value, head_};
         head_ = temp;
     }
 
-    virtual void pop() override {
+    virtual void pop() {
         if (empty()) {
             throw std::logic_error("StackLstT - try pop from empty stack.");
         }
@@ -72,7 +72,7 @@ public:
         }
     }
 
-    virtual T& top() const override {
+    virtual T& top() const {
         if (empty()) {
             throw std::logic_error("StackLstT - try get top from empty stack.");
         }
@@ -98,14 +98,14 @@ public:
         }
     }
 
-    virtual bool empty() const override {
+    virtual bool empty() const {
         if (head_ == nullptr) {
             return true;
         }
         return false;
     }
 
-    virtual std::ptrdiff_t size() const override {
+    virtual std::ptrdiff_t size() const {
         Node* temp = head_;
         std::ptrdiff_t counter = 0;
         while (temp != nullptr) {
@@ -156,30 +156,11 @@ public:
         return *this;
     }
 
-    StackLstT<T>& operator=(StackLstT<T>&& other) {
+    StackLstT<T>& operator=(StackLstT<T>&& other) noexcept {
         if (this != &other) {
             this->swap(other);
         }
         return *this;
-    }
-
-    const char left_brace = '[';
-    const char right_brace = ']';
-    const char comma = ',';
-
-    virtual void printToStream(std::ostream &os) const override {
-        Node* temp = head_;
-        os << left_brace;
-        bool flag = false;
-        while (temp != nullptr) {
-            if (flag) {
-                os << comma << " ";
-            }
-            os << temp->value;
-            flag = true;
-            temp = temp->next;
-        }
-        os << right_brace;
     }
 
 private:
