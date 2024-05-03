@@ -13,7 +13,7 @@ public:
     StackArrT();
     ~StackArrT();
     StackArrT(const StackArrT<T>& other);
-    StackArrT(StackArrT<T>&& other);
+    StackArrT(StackArrT<T>&& other) noexcept;
     StackArrT(const std::initializer_list<T>& list);
 
     void push(const T& value);
@@ -28,8 +28,8 @@ public:
     bool operator==(const StackArrT<T>& rhs) const;
     bool operator!=(const StackArrT<T>& rhs) const;
 
-    StackArrT<T>& operator=(const StackArrT<T>& rhs) noexcept;
-    StackArrT<T>& operator=(StackArrT<T>&& other);
+    StackArrT<T>& operator=(const StackArrT<T>& rhs);
+    StackArrT<T>& operator=(StackArrT<T>&& other) noexcept;
 private:
     std::ptrdiff_t size_ = 0;   //!< число элементов в буфере
     std::ptrdiff_t i_top_ = -1; //!< индекс top элемента
@@ -55,7 +55,7 @@ StackArrT<T>::StackArrT(const StackArrT<T>& other)
 }
 
 template <typename T>
-StackArrT<T>::StackArrT(StackArrT<T>&& other) {
+StackArrT<T>::StackArrT(StackArrT<T>&& other) noexcept {
     swap(other);
 }
 
@@ -165,7 +165,7 @@ bool StackArrT<T>::operator!=(const StackArrT<T>& rhs) const {
 }
 
 template <typename T>
-StackArrT<T>& StackArrT<T>::operator=(const StackArrT<T>& rhs) noexcept {
+StackArrT<T>& StackArrT<T>::operator=(const StackArrT<T>& rhs) {
     if (this != &rhs) {
         size_ = rhs.size_;
         i_top_ = rhs.i_top_;
@@ -181,7 +181,7 @@ StackArrT<T>& StackArrT<T>::operator=(const StackArrT<T>& rhs) noexcept {
 }
 
 template <typename T>
-StackArrT<T>& StackArrT<T>::operator=(StackArrT<T>&& other) {
+StackArrT<T>& StackArrT<T>::operator=(StackArrT<T>&& other) noexcept {
     if (this != &other) {
         swap(other);
     }
