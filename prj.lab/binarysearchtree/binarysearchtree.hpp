@@ -4,7 +4,6 @@
 
 #include <cstddef>
 
-
 struct TreeNode {
     int data;
     TreeNode* left;

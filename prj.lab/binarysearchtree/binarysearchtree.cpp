@@ -9,6 +9,7 @@ BinarySearchTree::BinarySearchTree() {
 BinarySearchTree::~BinarySearchTree() {
     int left = 0;
     int right = 0;
+
     while (root_->left != nullptr) {
         if (has(min())) {
             left = min();
