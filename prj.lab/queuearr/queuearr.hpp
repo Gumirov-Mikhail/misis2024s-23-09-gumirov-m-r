@@ -10,15 +10,15 @@ class QueueArr final {
 public:
     QueueArr() = default;
 
-    QueueArr(const QueueArr& src);
+    QueueArr(const QueueArr& rhs);
 
-    QueueArr(QueueArr&& src) noexcept;
+    QueueArr(QueueArr&& rhs) noexcept;
 
     ~QueueArr();
 
-    QueueArr& operator=(const QueueArr& src);
+    QueueArr& operator=(const QueueArr& rhs);
 
-    QueueArr& operator=(QueueArr&& src) noexcept ;
+    QueueArr& operator=(QueueArr&& rhs) noexcept ;
 
     [[nodiscard]] bool IsEmpty() const noexcept;
 
