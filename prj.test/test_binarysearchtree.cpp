@@ -32,6 +32,7 @@ TEST_CASE("BinarySearchTree - root, add, has and find") {
         CHECK_EQ(tree.find(ch5)->data, ch5);
         CHECK_EQ(tree.find(ch6)->data, ch6);
         CHECK_EQ(tree.find(ch7)->data, ch7);
+        CHECK_THROWS_WITH(tree.find(ch8), "BinarySearchTree - try find an not existing element");
     }
     SUBCASE("root and has") {
         CHECK_EQ(tree.root()->data, ch1);
@@ -104,7 +105,6 @@ TEST_CASE("BinarySearchTree - min, max") {
     int ch5 = 6;
     int ch6 = 9;
     int ch7 = 7;
-    int ch8 = 17;
     BinarySearchTree tree;
     tree.add(ch1);
     tree.add(ch2);
