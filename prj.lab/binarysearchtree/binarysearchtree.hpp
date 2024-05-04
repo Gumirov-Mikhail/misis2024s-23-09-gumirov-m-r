@@ -46,8 +46,6 @@ public:
     // Метод для нахождения максимального значения в дереве
     int max();
 
-    void clear(TreeNode* val);
-
 private:
     TreeNode* root_;
 };

@@ -6,21 +6,6 @@ BinarySearchTree::BinarySearchTree() {
     root_ = nullptr;
 }
 
-void BinarySearchTree::clear(TreeNode* val) {
-    if (val != nullptr) {
-        if (val->left != nullptr) {
-            clear(val->left);
-        }
-        if (val->right != nullptr) {
-            clear(val->right);
-        }
-        if (val->left == nullptr && val->right == nullptr) {
-            delete val;
-            val = nullptr;
-        }
-    }
-}
-
 BinarySearchTree::~BinarySearchTree() {
     int left = 0;
     int right = 0;
@@ -133,112 +118,6 @@ TreeNode* BinarySearchTree::find(int data) {
     throw std::logic_error("BinarySearchTree - try find an not existing element");
 }
 
-void BinarySearchTree::remove(int data) {
-    if (root_ != nullptr) {
-        TreeNode* temp = root_;
-        TreeNode* p_cur = temp;
-        while (temp->left != nullptr || temp->right != nullptr) { // поиск нужного элемента с запоминанием предыдущего
-            if (data < temp->data) {
-                if (temp->left == nullptr) {
-                    break;
-                }
-                p_cur = temp;
-                temp = temp->left;
-            }
-            else if (data > temp->data) {
-                if (temp->right == nullptr) {
-                    break;
-                }
-                p_cur = temp;
-                temp = temp->right;
-            }
-            else {
-                break;
-            }
-        }
-        if (data == temp->data) { // если элемент найден
-            if (root_ == temp) { // если подходящий элемент голова, то расписываем все 4 случая для неё
-                if (temp->left == nullptr && temp->right == nullptr) {
-                    root_ = nullptr;
-                }
-                else if (temp->left == nullptr) {
-                    p_cur = temp->right;
-                    root_ = p_cur;
-                }
-                else if (temp->right == nullptr) {
-                    p_cur = temp->left;
-                    root_ = p_cur;
-                }
-                else {
-                    TreeNode* del = temp->right;
-                    while (del->left != nullptr) {
-                        del = del->left;
-                    }
-                    TreeNode* dop = del;
-                    while (dop->right != nullptr) {
-                        dop = dop->right;
-                    }
-                    del->left = temp->left;
-                    dop->right = temp->right;
-                }
-                delete temp;
-                temp = nullptr;
-            }
-            else { // если подходящий элемент не голова, то расписываем все 4 случая для любых элементов
-                if (temp->left == nullptr && temp->right == nullptr) {
-                    if (p_cur->left == temp) {
-                        p_cur->left = nullptr;
-                    }
-                    else {
-                        p_cur->right = nullptr;
-                    }
-                }
-                else if (temp->left == nullptr) {
-                    if (p_cur->left == temp) {
-                        p_cur->left = temp->right;
-                    }
-                    else {
-                        p_cur->right = temp->right;
-                    }
-                }
-                else if (temp->right == nullptr) {
-                    if (p_cur->left == temp) {
-                        p_cur->left = temp->left;
-                    }
-                    else {
-                        p_cur->right = temp->left;
-                    }
-                }
-                else {
-                    TreeNode* del = temp->right;
-                    while (del->left != nullptr) {
-                        del = del->left;
-                    }
-                    TreeNode* dop = del;
-                    while (dop->right != nullptr) {
-                        dop = dop->right;
-                    }
-                    if (p_cur->left == temp) {
-                        p_cur->left = del;
-                    }
-                    else {
-                        p_cur->right = del;
-                    }
-                    del->left = temp->left;
-                    dop->right = temp->right;
-                }
-                delete temp;
-                temp = nullptr;
-            }
-        }
-        else {
-            throw std::logic_error("BinarySearchTree - try an not existing element");
-        }
-    }
-    else {
-        throw std::logic_error("BinarySearchTree - try remove from empty tree");
-    }
-}
 
 int BinarySearchTree::min() {
     if (root_ == nullptr) {
@@ -265,3 +144,115 @@ int BinarySearchTree::max() {
         return temp->data;
     }
 }
+
+void BinarySearchTree::remove(int data) {
+    if (root_ != nullptr) {
+        TreeNode* temp = root_;
+        TreeNode* p_cur = temp;
+        while (temp->left != nullptr && temp->right != nullptr) {
+            if (data < temp->data) {
+                if (temp->left == nullptr) {
+                    break;
+                }
+                p_cur = temp;
+                temp = temp->left;
+            }
+            else if (data > temp->data) {
+                if (temp->right == nullptr) {
+                    break;
+                }
+                p_cur = temp;
+                temp = temp->right;
+            }
+            else {
+                break;
+            }
+        }
+        if (data == temp->data) {
+            if (root_ == temp) {
+                if (temp->left == nullptr && temp->right == nullptr) {
+                    root_ = nullptr;
+                }
+                else if (temp->left == nullptr) {
+                    root_ = temp->right;
+                }
+                else if (temp->right == nullptr) {
+                    root_ = temp->left;
+                }
+                else {
+                    TreeNode* rhs = temp->right;
+                    while (rhs->left != nullptr) {
+                        rhs = rhs->left;
+                    }
+                    TreeNode* dop = rhs;
+                    while (dop->right != nullptr) {
+                        dop = dop->right;
+                    }
+                    root_ = rhs;
+                    dop->right = temp->right;
+                }
+                delete temp;
+                temp = nullptr;
+            }
+            else {
+                if (temp->left == nullptr && temp->right == nullptr) {
+                    if (p_cur->left == temp) {
+                        p_cur->left = nullptr;
+                    }
+                    else {
+                        p_cur->right = nullptr;
+                    }
+                }
+                else if (temp->left == nullptr) {
+                    if (p_cur->left == temp) {
+                        p_cur->left = temp->right;
+                    }
+                    else {
+                        p_cur->right = temp->right;
+                    }
+                }
+                else if (temp->right == nullptr) {
+                    if (p_cur->left == temp) {
+                        p_cur->left = temp->left;
+                    }
+                    else {
+                        p_cur->right = temp->left;
+                    }
+                }
+                else {
+                    TreeNode* rhs = temp->right;
+                    TreeNode* trash = temp;
+                    while (rhs->left != nullptr) {
+                        trash = rhs;
+                        rhs = rhs->left;
+                    }
+                    TreeNode* dop = rhs;
+                    while (dop->right != nullptr) {
+                        dop = dop->right;
+                    }
+                    if (p_cur->left == temp) {
+                        p_cur->left = rhs;
+                        rhs->left = temp->left;
+                        dop->right = temp->right;
+                        trash->left = nullptr;
+                    }
+                    else {
+                        p_cur->right = rhs;
+                        rhs->left = temp->left;
+                        dop->right = temp->right;
+                        trash->left = nullptr;
+                    }
+                }
+                delete temp;
+                temp = nullptr;
+            }
+        }
+        else {
+            throw std::logic_error("BinarySearchTree - try remove an not existing element");
+        }
+    }
+    else {
+        throw std::logic_error("BinarySearchTree - try remove from empty tree");
+    }
+}
+
