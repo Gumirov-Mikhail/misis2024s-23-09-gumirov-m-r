@@ -13,26 +13,14 @@ public:
     virtual void pop() = 0;
     virtual T &top() const = 0;
 
-    virtual bool empty() const = 0;
-    virtual std::ptrdiff_t size() const = 0;
+    [[nodiscard]] virtual bool empty() const = 0;
+    [[nodiscard]] virtual std::ptrdiff_t size() const = 0;
 
-    virtual ~IStackBase() {};
+    virtual ~IStackBase() = default;
 
     virtual void printToStream(std::ostream &os) const {
-        os << left_brace;
-        for (int i = 0; i < size(); i++) {
-            if (i > 0) {
-                os << comma << " ";
-            }
-            os << top();
-        }
-        os << right_brace;
+        throw std::logic_error("IStackBase - try print IStackBase");
     }
-
-private:
-    char left_brace = '[';
-    char right_brace = ']';
-    char comma = ',';
 };
 
 #endif

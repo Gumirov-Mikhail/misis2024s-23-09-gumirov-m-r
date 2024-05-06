@@ -11,7 +11,7 @@ public:
         head_ = nullptr;
     }
 
-    virtual ~StackLstT() {
+    ~StackLstT() override {
         Node* temp = head_;
         while (temp != nullptr) {
             head_ = head_->next;
@@ -55,12 +55,12 @@ public:
         }
     }
 
-    virtual void push(const T& value) {
+    void push(const T& value) override {
         Node* temp = new Node {value, head_};
         head_ = temp;
     }
 
-    virtual void pop() {
+    void pop() override {
         if (empty()) {
             throw std::logic_error("StackLstT - try pop from empty stack.");
         }
@@ -72,7 +72,7 @@ public:
         }
     }
 
-    virtual T& top() const {
+    T& top() const override {
         if (empty()) {
             throw std::logic_error("StackLstT - try get top from empty stack.");
         }
@@ -98,14 +98,14 @@ public:
         }
     }
 
-    virtual bool empty() const {
+    [[nodiscard]] bool empty() const override {
         if (head_ == nullptr) {
             return true;
         }
         return false;
     }
 
-    virtual std::ptrdiff_t size() const {
+    [[nodiscard]] std::ptrdiff_t size() const override {
         Node* temp = head_;
         std::ptrdiff_t counter = 0;
         while (temp != nullptr) {
@@ -161,6 +161,21 @@ public:
             this->swap(other);
         }
         return *this;
+    }
+
+    void printToStream(std::ostream &os) const override {
+        os << '[';
+        Node* temp = head_;
+        bool flag = false;
+        while (temp != nullptr) {
+            if (flag) {
+                os << ", ";
+            }
+            os << temp->value;
+            temp = temp->next;
+            flag = true;
+        }
+        os << ']';
     }
 
 private:

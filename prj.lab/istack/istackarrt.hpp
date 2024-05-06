@@ -11,7 +11,7 @@ public:
         data_ = nullptr;
     }
 
-    virtual ~StackArrT() override {
+    virtual ~StackArrT() {
         delete [] data_;
         data_ = nullptr;
     }
@@ -34,7 +34,7 @@ public:
         std::copy(list.begin(), list.end(), data_);
     }
 
-    virtual void push(const T& value) override {
+    virtual void push(const T& value) {
         if (size_ == 0) {
             size_ = 8;
             data_ = new T [size_];
@@ -50,14 +50,14 @@ public:
         data_[i_top_] = value;
     }
 
-    virtual void pop() override {
+    virtual void pop() {
         if (empty()) {
             throw std::logic_error("StackArrT - try pop from empty stack.");
         }
         i_top_--;
     }
 
-    virtual T& top() const override {
+    virtual T& top() const {
         if (empty()) {
             throw std::logic_error("StackArrT - try get top from empty stack.");
         }
@@ -98,11 +98,11 @@ public:
         }
     }
 
-    virtual bool empty() const override {
+    [[nodiscard]] virtual bool empty() const {
         return (i_top_ == -1);
     }
 
-    virtual std::ptrdiff_t size() const override {
+    [[nodiscard]] virtual std::ptrdiff_t size() const {
         return i_top_ + 1;
     }
 
@@ -143,6 +143,17 @@ public:
         }
         return *this;
     }
+
+    void printToStream(std::ostream &os) const override {
+        os << '[';
+        for (int i = 0; i < size(); i++) {
+            if (i > 0) {
+                os << ", ";
+            }
+            os << data_[i_top_ - i];
+        }
+        os << ']';
+    };
 
 private:
     std::ptrdiff_t size_ = 0;   //!< число элементов в буфере
