@@ -27,6 +27,7 @@ TEST_CASE("BinarySearchTree - tree only with left-hand side") {
     tree_number_one.add(ch5);
     tree_number_one.add(ch6);
     tree_number_one.add(ch7);
+
     SUBCASE("BinarySearchTree - root, add, has and find") {
         CHECK_THROWS_WITH(tree_number_one.add(ch1), "BinarySearchTree - try add an existing element");
         CHECK_THROWS_WITH(tree_number_one.add(ch7), "BinarySearchTree - try add an existing element");
@@ -53,6 +54,7 @@ TEST_CASE("BinarySearchTree - tree only with left-hand side") {
             CHECK_EQ(tree_number_one.has(ch8), false);
         }
     }
+
     SUBCASE("BinarySearchTree - remove and find") {
         SUBCASE("remove with two descendants") {
             tree_number_one.remove(ch2);
@@ -86,30 +88,23 @@ TEST_CASE("BinarySearchTree - tree only with left-hand side") {
             CHECK_EQ(tree_number_one.find(ch7)->data, ch7);
         }
     }
-    BinarySearchTree tree_number_two;
-    tree_number_two.add(ch1);
-    tree_number_two.add(ch2);
-    tree_number_two.add(ch3);
-    tree_number_two.add(ch4);
-    tree_number_two.add(ch5);
-    tree_number_two.add(ch6);
-    tree_number_two.add(ch7);
+
     SUBCASE("BinarySearchTree - min, max") {
-        CHECK_EQ(tree_number_two.min(), ch3);
-        CHECK_EQ(tree_number_two.max(), ch1);
-        tree_number_two.remove(ch3);
-        tree_number_two.remove(ch1);
-        CHECK_EQ(tree_number_two.min(), ch2);
-        CHECK_EQ(tree_number_two.max(), ch6);
-        tree_number_two.remove(ch2);
-        tree_number_two.remove(ch6);
-        CHECK_EQ(tree_number_two.min(), ch5);
-        CHECK_EQ(tree_number_two.max(), ch4);
-        tree_number_two.remove(ch5);
-        tree_number_two.remove(ch4);
-        CHECK_EQ(tree_number_two.min(), ch7);
-        CHECK_EQ(tree_number_two.max(), ch7);
-        CHECK_THROWS_WITH(tree_number_two.remove(ch8), "BinarySearchTree - try remove an not existing element");
+        CHECK_EQ(tree_number_one.min(), ch3);
+        CHECK_EQ(tree_number_one.max(), ch1);
+        tree_number_one.remove(ch3);
+        tree_number_one.remove(ch1);
+        CHECK_EQ(tree_number_one.min(), ch2);
+        CHECK_EQ(tree_number_one.max(), ch6);
+        tree_number_one.remove(ch2);
+        tree_number_one.remove(ch6);
+        CHECK_EQ(tree_number_one.min(), ch5);
+        CHECK_EQ(tree_number_one.max(), ch4);
+        tree_number_one.remove(ch5);
+        tree_number_one.remove(ch4);
+        CHECK_EQ(tree_number_one.min(), ch7);
+        CHECK_EQ(tree_number_one.max(), ch7);
+        CHECK_THROWS_WITH(tree_number_one.remove(ch8), "BinarySearchTree - try remove an not existing element");
     }
 }
 
@@ -138,6 +133,7 @@ TEST_CASE("BinarySearchTree - tree only with right-hand side") {
     tree_number_one.add(ch5);
     tree_number_one.add(ch6);
     tree_number_one.add(ch7);
+
     SUBCASE("BinarySearchTree - root, add, has and find") {
         CHECK_THROWS_WITH(tree_number_one.add(ch1), "BinarySearchTree - try add an existing element");
         CHECK_THROWS_WITH(tree_number_one.add(ch7), "BinarySearchTree - try add an existing element");
@@ -164,6 +160,7 @@ TEST_CASE("BinarySearchTree - tree only with right-hand side") {
             CHECK_EQ(tree_number_one.has(ch8), false);
         }
     }
+
     SUBCASE("BinarySearchTree - remove and find") {
         SUBCASE("remove with two descendants") {
             tree_number_one.remove(ch2);
@@ -197,30 +194,23 @@ TEST_CASE("BinarySearchTree - tree only with right-hand side") {
             CHECK_EQ(tree_number_one.find(ch7)->data, ch7);
         }
     }
-    BinarySearchTree tree_number_two;
-    tree_number_two.add(ch1);
-    tree_number_two.add(ch2);
-    tree_number_two.add(ch3);
-    tree_number_two.add(ch4);
-    tree_number_two.add(ch5);
-    tree_number_two.add(ch6);
-    tree_number_two.add(ch7);
+
     SUBCASE("BinarySearchTree - min, max") {
-        CHECK_EQ(tree_number_two.min(), ch1);
-        CHECK_EQ(tree_number_two.max(), ch3);
-        tree_number_two.remove(ch3);
-        tree_number_two.remove(ch1);
-        CHECK_EQ(tree_number_two.min(), ch5);
-        CHECK_EQ(tree_number_two.max(), ch2);
-        tree_number_two.remove(ch2);
-        tree_number_two.remove(ch5);
-        CHECK_EQ(tree_number_two.min(), ch7);
-        CHECK_EQ(tree_number_two.max(), ch6);
-        tree_number_two.remove(ch7);
-        tree_number_two.remove(ch6);
-        CHECK_EQ(tree_number_two.min(), ch4);
-        CHECK_EQ(tree_number_two.max(), ch4);
-        CHECK_THROWS_WITH(tree_number_two.remove(ch8), "BinarySearchTree - try remove an not existing element");
+        CHECK_EQ(tree_number_one.min(), ch1);
+        CHECK_EQ(tree_number_one.max(), ch3);
+        tree_number_one.remove(ch3);
+        tree_number_one.remove(ch1);
+        CHECK_EQ(tree_number_one.min(), ch5);
+        CHECK_EQ(tree_number_one.max(), ch2);
+        tree_number_one.remove(ch2);
+        tree_number_one.remove(ch5);
+        CHECK_EQ(tree_number_one.min(), ch7);
+        CHECK_EQ(tree_number_one.max(), ch6);
+        tree_number_one.remove(ch7);
+        tree_number_one.remove(ch6);
+        CHECK_EQ(tree_number_one.min(), ch4);
+        CHECK_EQ(tree_number_one.max(), ch4);
+        CHECK_THROWS_WITH(tree_number_one.remove(ch8), "BinarySearchTree - try remove an not existing element");
     }
 }
 
@@ -332,6 +322,7 @@ TEST_CASE("BinarySearchTree - tree with both sides") {
             CHECK_EQ(tree_number_one.has(ch18), false);
         }
     }
+
     SUBCASE("BinarySearchTree - remove and find") {
         SUBCASE("remove with two descendants") {
             tree_number_one.remove(ch2);
@@ -394,50 +385,34 @@ TEST_CASE("BinarySearchTree - tree with both sides") {
         }
     }
 
-    BinarySearchTree tree_number_two;
-    tree_number_two.add(ch1);
-    tree_number_two.add(ch2);
-    tree_number_two.add(ch3);
-    tree_number_two.add(ch4);
-    tree_number_two.add(ch5);
-    tree_number_two.add(ch6);
-    tree_number_two.add(ch7);
-
-    tree_number_two.add(ch12);
-    tree_number_two.add(ch13);
-    tree_number_two.add(ch14);
-    tree_number_two.add(ch15);
-    tree_number_two.add(ch16);
-    tree_number_two.add(ch17);
-
     SUBCASE("BinarySearchTree - min, max") {
-        CHECK_EQ(tree_number_two.min(), ch3);
-        CHECK_EQ(tree_number_two.max(), ch13);
-        tree_number_two.remove(ch13);
-        tree_number_two.remove(ch3);
-        CHECK_EQ(tree_number_two.min(), ch2);
-        CHECK_EQ(tree_number_two.max(), ch12);
-        tree_number_two.remove(ch2);
-        tree_number_two.remove(ch12);
-        CHECK_EQ(tree_number_two.min(), ch5);
-        CHECK_EQ(tree_number_two.max(), ch16);
-        tree_number_two.remove(ch5);
-        tree_number_two.remove(ch16);
-        CHECK_EQ(tree_number_two.min(), ch7);
-        CHECK_EQ(tree_number_two.max(), ch14);
-        tree_number_two.remove(ch7);
-        tree_number_two.remove(ch14);
-        CHECK_EQ(tree_number_two.min(), ch4);
-        CHECK_EQ(tree_number_two.max(), ch17);
-        tree_number_two.remove(ch4);
-        tree_number_two.remove(ch17);
-        CHECK_EQ(tree_number_two.min(), ch6);
-        CHECK_EQ(tree_number_two.max(), ch15);
-        tree_number_two.remove(ch6);
-        tree_number_two.remove(ch15);
-        CHECK_EQ(tree_number_two.min(), ch1);
-        CHECK_EQ(tree_number_two.max(), ch1);
-        CHECK_THROWS_WITH(tree_number_two.remove(ch8), "BinarySearchTree - try remove an not existing element");
-        CHECK_THROWS_WITH(tree_number_two.remove(ch18), "BinarySearchTree - try remove an not existing element");
+        CHECK_EQ(tree_number_one.min(), ch3);
+        CHECK_EQ(tree_number_one.max(), ch13);
+        tree_number_one.remove(ch13);
+        tree_number_one.remove(ch3);
+        CHECK_EQ(tree_number_one.min(), ch2);
+        CHECK_EQ(tree_number_one.max(), ch12);
+        tree_number_one.remove(ch2);
+        tree_number_one.remove(ch12);
+        CHECK_EQ(tree_number_one.min(), ch5);
+        CHECK_EQ(tree_number_one.max(), ch16);
+        tree_number_one.remove(ch5);
+        tree_number_one.remove(ch16);
+        CHECK_EQ(tree_number_one.min(), ch7);
+        CHECK_EQ(tree_number_one.max(), ch14);
+        tree_number_one.remove(ch7);
+        tree_number_one.remove(ch14);
+        CHECK_EQ(tree_number_one.min(), ch4);
+        CHECK_EQ(tree_number_one.max(), ch17);
+        tree_number_one.remove(ch4);
+        tree_number_one.remove(ch17);
+        CHECK_EQ(tree_number_one.min(), ch6);
+        CHECK_EQ(tree_number_one.max(), ch15);
+        tree_number_one.remove(ch6);
+        tree_number_one.remove(ch15);
+        CHECK_EQ(tree_number_one.min(), ch1);
+        CHECK_EQ(tree_number_one.max(), ch1);
+        CHECK_THROWS_WITH(tree_number_one.remove(ch8), "BinarySearchTree - try remove an not existing element");
+        CHECK_THROWS_WITH(tree_number_one.remove(ch18), "BinarySearchTree - try remove an not existing element");
     }
 }
