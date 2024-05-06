@@ -1,5 +1,6 @@
 #include <binarysearchtree/binarysearchtree.hpp>
 
+#include <stack>
 #include <stdexcept>
 
 BinarySearchTree::BinarySearchTree() {
@@ -7,19 +8,26 @@ BinarySearchTree::BinarySearchTree() {
 }
 
 BinarySearchTree::~BinarySearchTree() {
-    int left = 0;
-    int right = 0;
+    std::stack<TreeNode*> st;
+    TreeNode* current = root_;
+    TreeNode* lastVisited = nullptr;
 
-    while (root_->left != nullptr) {
-        if (has(min())) {
-            left = min();
-            remove(left);
+    while (current != nullptr || !st.empty()) {
+        if (current != nullptr) {
+            st.push(current);
+            current = current->left;
         }
-    }
-    while (root_->right != nullptr) {
-        if (has(max())) {
-            right = max();
-            remove(right);
+        else {
+            TreeNode *topNode = st.top();
+
+            if (topNode->right && topNode->right != lastVisited) {
+                current = topNode->right;
+            }
+            else {
+                lastVisited = topNode;
+                st.pop();
+                delete topNode;
+            }
         }
     }
 }
@@ -31,7 +39,7 @@ TreeNode* BinarySearchTree::root() {
 void BinarySearchTree::add(int data) {
     if (root_ != nullptr) {
         TreeNode* temp = root_;
-        while (temp->right != nullptr || temp->left != nullptr) {
+        while (temp != nullptr || data != temp->data) {
             if (data < temp->data) {
                 if (temp->left == nullptr) {
                     break;
@@ -45,7 +53,7 @@ void BinarySearchTree::add(int data) {
                 temp = temp->right;
             }
             else {
-                throw std::logic_error("BinarySearchTree - try add an existing element");
+                break;
             }
         }
         if (data < temp->data) {
@@ -68,7 +76,7 @@ void BinarySearchTree::add(int data) {
 bool BinarySearchTree::has(int data) {
     if (root_ != nullptr) {
         TreeNode* temp = root_;
-        while (temp->left != nullptr || temp->right != nullptr) {
+        while (temp != nullptr || data != temp->data) {
             if (data < temp->data) {
                 if (temp->left == nullptr) {
                     break;
@@ -95,28 +103,37 @@ bool BinarySearchTree::has(int data) {
 TreeNode* BinarySearchTree::find(int data) {
     if (root_ != nullptr) {
         TreeNode* temp = root_;
-        while (temp->left != nullptr || temp->right != nullptr) {
+        while (temp != nullptr || data != temp->data) {
             if (data < temp->data) {
                 if (temp->left == nullptr) {
                     break;
                 }
-                temp = temp->left;
+                else {
+                    temp = temp->left;
+                }
             }
             else if (data > temp->data) {
                 if (temp->right == nullptr) {
                     break;
                 }
-                temp = temp->right;
+                else {
+                    temp = temp->right;
+                }
             }
             else {
-                return temp;
+                break;
             }
         }
         if (data == temp->data) {
             return temp;
         }
+        else {
+            throw std::logic_error("BinarySearchTree - try find an not existing element");
+        }
     }
-    throw std::logic_error("BinarySearchTree - try find an not existing element");
+    else {
+        throw std::logic_error("BinarySearchTree - try find an not existing element");
+    }
 }
 
 
@@ -150,7 +167,7 @@ void BinarySearchTree::remove(int data) {
     if (root_ != nullptr) {
         TreeNode* temp = root_;
         TreeNode* p_cur = temp;
-        while (temp->left != nullptr && temp->right != nullptr) {
+        while (temp != nullptr || data != temp->data) { // find existing element for remove
             if (data < temp->data) {
                 if (temp->left == nullptr) {
                     break;
@@ -169,8 +186,8 @@ void BinarySearchTree::remove(int data) {
                 break;
             }
         }
-        if (data == temp->data) {
-            if (root_ == temp) {
+        if (data == temp->data) { // if find existing element
+            if (root_ == temp) { // if existing element is root_ (расписываем все 4 случая)
                 if (temp->left == nullptr && temp->right == nullptr) {
                     root_ = nullptr;
                 }
@@ -193,9 +210,8 @@ void BinarySearchTree::remove(int data) {
                     dop->right = temp->right;
                 }
                 delete temp;
-                temp = nullptr;
             }
-            else {
+            else { // if existing element isn't root_ (расписываем все 4 случая)
                 if (temp->left == nullptr && temp->right == nullptr) {
                     if (p_cur->left == temp) {
                         p_cur->left = nullptr;
@@ -234,18 +250,21 @@ void BinarySearchTree::remove(int data) {
                     if (p_cur->left == temp) {
                         p_cur->left = rhs;
                         rhs->left = temp->left;
-                        dop->right = temp->right;
+                        if (rhs->right != nullptr) {
+                            dop->right = temp->right;
+                        }
                         trash->left = nullptr;
                     }
                     else {
                         p_cur->right = rhs;
                         rhs->left = temp->left;
-                        dop->right = temp->right;
+                        if (rhs->right != nullptr) {
+                            dop->right = temp->right;
+                        }
                         trash->left = nullptr;
                     }
                 }
                 delete temp;
-                temp = nullptr;
             }
         }
         else {
@@ -256,4 +275,3 @@ void BinarySearchTree::remove(int data) {
         throw std::logic_error("BinarySearchTree - try remove from empty tree");
     }
 }
-
