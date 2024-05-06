@@ -33,6 +33,9 @@ BinarySearchTree::~BinarySearchTree() {
 }
 
 TreeNode* BinarySearchTree::root() {
+    if (root_ == nullptr) {
+        throw std::logic_error("BinarySearchTree - try get root from empty tree");
+    }
     return root_;
 }
 
@@ -206,8 +209,10 @@ void BinarySearchTree::remove(int data) {
                     while (dop->right != nullptr) {
                         dop = dop->right;
                     }
+                    if (rhs != temp->right) {
+                        dop->right = temp->right;
+                    }
                     root_ = rhs;
-                    dop->right = temp->right;
                 }
                 delete temp;
             }
@@ -250,7 +255,7 @@ void BinarySearchTree::remove(int data) {
                     if (p_cur->left == temp) {
                         p_cur->left = rhs;
                         rhs->left = temp->left;
-                        if (rhs->right != nullptr) {
+                        if (rhs != temp->right) {
                             dop->right = temp->right;
                         }
                         trash->left = nullptr;
@@ -258,7 +263,7 @@ void BinarySearchTree::remove(int data) {
                     else {
                         p_cur->right = rhs;
                         rhs->left = temp->left;
-                        if (rhs->right != nullptr) {
+                        if (rhs != temp->right) {
                             dop->right = temp->right;
                         }
                         trash->left = nullptr;
