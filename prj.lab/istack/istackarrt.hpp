@@ -161,10 +161,6 @@ private:
     T* data_ = nullptr;   //!< элементы стека
 };
 
-template<typename T>
-inline std::ostream &operator<<(std::ostream &os, const StackArrT<T> &rhs) noexcept {
-    rhs.printToStream(os);
-    return os;
-}
+
 
 #endif

@@ -23,4 +23,10 @@ public:
     }
 };
 
+template<typename T>
+inline std::ostream &operator<<(std::ostream &os, const IStackBase<T> &rhs) noexcept {
+    rhs.printToStream(os);
+    return os;
+}
+
 #endif

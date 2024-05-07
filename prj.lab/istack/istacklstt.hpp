@@ -187,10 +187,4 @@ private:
     Node* head_ = nullptr;
 };
 
-template<typename T>
-inline std::ostream& operator<<(std::ostream& os, StackLstT<T> &rhs) noexcept {
-    rhs.printToStream(os);
-    return os;
-}
-
 #endif
