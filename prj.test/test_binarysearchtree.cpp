@@ -44,14 +44,14 @@ TEST_CASE("BinarySearchTree - tree only with left-hand side") {
         }
         SUBCASE("root and has") {
             CHECK_EQ(bst.root()->data, ch1);
-            CHECK_EQ(bst.has(ch1), true);
-            CHECK_EQ(bst.has(ch2), true);
-            CHECK_EQ(bst.has(ch3), true);
-            CHECK_EQ(bst.has(ch4), true);
-            CHECK_EQ(bst.has(ch5), true);
-            CHECK_EQ(bst.has(ch6), true);
-            CHECK_EQ(bst.has(ch7), true);
-            CHECK_EQ(bst.has(ch8), false);
+            CHECK(bst.has(ch1));
+            CHECK(bst.has(ch2));
+            CHECK(bst.has(ch3));
+            CHECK(bst.has(ch4));
+            CHECK(bst.has(ch5));
+            CHECK(bst.has(ch6));
+            CHECK(bst.has(ch7));
+            CHECK(!bst.has(ch8));
         }
     }
 
@@ -59,13 +59,13 @@ TEST_CASE("BinarySearchTree - tree only with left-hand side") {
         SUBCASE("remove with two descendants") {
             bst.remove(ch2);
             CHECK_EQ(bst.find(ch1)->data, ch1);
-            CHECK_EQ(bst.has(ch2), false);
+            CHECK(!bst.has(ch2));
             CHECK_EQ(bst.find(ch3)->data, ch3);
-            CHECK_EQ(bst.has(ch4), true);
-            CHECK_EQ(bst.has(ch5), true);
-            CHECK_EQ(bst.has(ch6), true);
-            CHECK_EQ(bst.has(ch7), true);
-            CHECK_EQ(bst.has(ch8), false);
+            CHECK(bst.has(ch4));
+            CHECK(bst.has(ch5));
+            CHECK(bst.has(ch6));
+            CHECK(bst.has(ch7));
+            CHECK(!bst.has(ch8));
         }
         SUBCASE("remove with one descendant") {
             bst.remove(ch5);
@@ -73,7 +73,7 @@ TEST_CASE("BinarySearchTree - tree only with left-hand side") {
             CHECK_EQ(bst.find(ch2)->data, ch2);
             CHECK_EQ(bst.find(ch3)->data, ch3);
             CHECK_EQ(bst.find(ch4)->data, ch4);
-            CHECK_EQ(bst.has(ch5), false);
+            CHECK(!bst.has(ch5));
             CHECK_EQ(bst.find(ch6)->data, ch6);
             CHECK_EQ(bst.find(ch7)->data, ch7);
         }
@@ -81,7 +81,7 @@ TEST_CASE("BinarySearchTree - tree only with left-hand side") {
             bst.remove(ch3);
             CHECK_EQ(bst.find(ch1)->data, ch1);
             CHECK_EQ(bst.find(ch2)->data, ch2);
-            CHECK_EQ(bst.has(ch3), false);
+            CHECK(!bst.has(ch3));
             CHECK_EQ(bst.find(ch4)->data, ch4);
             CHECK_EQ(bst.find(ch5)->data, ch5);
             CHECK_EQ(bst.find(ch6)->data, ch6);
@@ -104,6 +104,15 @@ TEST_CASE("BinarySearchTree - tree only with left-hand side") {
         bst.remove(ch4);
         CHECK_EQ(bst.min(), ch7);
         CHECK_EQ(bst.max(), ch7);
+        CHECK_EQ(bst.root()->data, ch7);
+        CHECK(!bst.has(ch1));
+        CHECK(!bst.has(ch2));
+        CHECK(!bst.has(ch3));
+        CHECK(!bst.has(ch4));
+        CHECK(!bst.has(ch5));
+        CHECK(!bst.has(ch6));
+        CHECK(bst.has(ch7));
+        CHECK(!bst.has(ch8));
         CHECK_THROWS_WITH(bst.remove(ch8), "BinarySearchTree - try remove an not existing element");
     }
 }
@@ -150,14 +159,14 @@ TEST_CASE("BinarySearchTree - tree only with right-hand side") {
         }
         SUBCASE("root and has") {
             CHECK_EQ(bst.root()->data, ch1);
-            CHECK_EQ(bst.has(ch1), true);
-            CHECK_EQ(bst.has(ch2), true);
-            CHECK_EQ(bst.has(ch3), true);
-            CHECK_EQ(bst.has(ch4), true);
-            CHECK_EQ(bst.has(ch5), true);
-            CHECK_EQ(bst.has(ch6), true);
-            CHECK_EQ(bst.has(ch7), true);
-            CHECK_EQ(bst.has(ch8), false);
+            CHECK(bst.has(ch1));
+            CHECK(bst.has(ch2));
+            CHECK(bst.has(ch3));
+            CHECK(bst.has(ch4));
+            CHECK(bst.has(ch5));
+            CHECK(bst.has(ch6));
+            CHECK(bst.has(ch7));
+            CHECK(!bst.has(ch8));
         }
     }
 
@@ -165,13 +174,13 @@ TEST_CASE("BinarySearchTree - tree only with right-hand side") {
         SUBCASE("remove with two descendants") {
             bst.remove(ch2);
             CHECK_EQ(bst.find(ch1)->data, ch1);
-            CHECK_EQ(bst.has(ch2), false);
+            CHECK(!bst.has(ch2));
             CHECK_EQ(bst.find(ch3)->data, ch3);
-            CHECK_EQ(bst.has(ch4), true);
-            CHECK_EQ(bst.has(ch5), true);
-            CHECK_EQ(bst.has(ch6), true);
-            CHECK_EQ(bst.has(ch7), true);
-            CHECK_EQ(bst.has(ch8), false);
+            CHECK(bst.has(ch4));
+            CHECK(bst.has(ch5));
+            CHECK(bst.has(ch6));
+            CHECK(bst.has(ch7));
+            CHECK(!bst.has(ch8));
         }
         SUBCASE("remove with one descendant") {
             bst.remove(ch5);
@@ -179,7 +188,7 @@ TEST_CASE("BinarySearchTree - tree only with right-hand side") {
             CHECK_EQ(bst.find(ch2)->data, ch2);
             CHECK_EQ(bst.find(ch3)->data, ch3);
             CHECK_EQ(bst.find(ch4)->data, ch4);
-            CHECK_EQ(bst.has(ch5), false);
+            CHECK(!bst.has(ch5));
             CHECK_EQ(bst.find(ch6)->data, ch6);
             CHECK_EQ(bst.find(ch7)->data, ch7);
         }
@@ -187,7 +196,7 @@ TEST_CASE("BinarySearchTree - tree only with right-hand side") {
             bst.remove(ch3);
             CHECK_EQ(bst.find(ch1)->data, ch1);
             CHECK_EQ(bst.find(ch2)->data, ch2);
-            CHECK_EQ(bst.has(ch3), false);
+            CHECK(!bst.has(ch3));
             CHECK_EQ(bst.find(ch4)->data, ch4);
             CHECK_EQ(bst.find(ch5)->data, ch5);
             CHECK_EQ(bst.find(ch6)->data, ch6);
@@ -210,6 +219,15 @@ TEST_CASE("BinarySearchTree - tree only with right-hand side") {
         bst.remove(ch6);
         CHECK_EQ(bst.min(), ch4);
         CHECK_EQ(bst.max(), ch4);
+        CHECK_EQ(bst.root()->data, ch4);
+        CHECK(!bst.has(ch1));
+        CHECK(!bst.has(ch2));
+        CHECK(!bst.has(ch3));
+        CHECK(bst.has(ch4));
+        CHECK(!bst.has(ch5));
+        CHECK(!bst.has(ch6));
+        CHECK(!bst.has(ch7));
+        CHECK(!bst.has(ch8));
         CHECK_THROWS_WITH(bst.remove(ch8), "BinarySearchTree - try remove an not existing element");
     }
 }
@@ -225,8 +243,14 @@ TEST_CASE("BinarySearchTree - empty tree") {
         CHECK_THROWS_WITH(bst.find(ch1), "BinarySearchTree - try find an not existing element");
         bst.add(ch1);
         bst.add(ch2);
+        CHECK(bst.has(ch1));
+        CHECK(bst.has(ch2));
         bst.remove(ch1);
+        CHECK(!bst.has(ch1));
+        CHECK(bst.has(ch2));
         bst.remove(ch2);
+        CHECK(!bst.has(ch1));
+        CHECK(!bst.has(ch2));
         CHECK_THROWS_WITH(bst.min(), "BinarySearchTree - try get min from empty tree");
         CHECK_THROWS_WITH(bst.max(), "BinarySearchTree - try get max from empty tree");
         CHECK_THROWS_WITH(bst.remove(ch1), "BinarySearchTree - try remove from empty tree");
@@ -302,22 +326,22 @@ TEST_CASE("BinarySearchTree - tree with both sides") {
         }
         SUBCASE("root and has") {
             CHECK_EQ(bst.root()->data, ch1);
-            CHECK_EQ(bst.has(ch1), true);
-            CHECK_EQ(bst.has(ch2), true);
-            CHECK_EQ(bst.has(ch3), true);
-            CHECK_EQ(bst.has(ch4), true);
-            CHECK_EQ(bst.has(ch5), true);
-            CHECK_EQ(bst.has(ch6), true);
-            CHECK_EQ(bst.has(ch7), true);
-            CHECK_EQ(bst.has(ch8), false);
+            CHECK(bst.has(ch1));
+            CHECK(bst.has(ch2));
+            CHECK(bst.has(ch3));
+            CHECK(bst.has(ch4));
+            CHECK(bst.has(ch5));
+            CHECK(bst.has(ch6));
+            CHECK(bst.has(ch7));
+            CHECK(!bst.has(ch8));
 
-            CHECK_EQ(bst.has(ch12), true);
-            CHECK_EQ(bst.has(ch13), true);
-            CHECK_EQ(bst.has(ch14), true);
-            CHECK_EQ(bst.has(ch15), true);
-            CHECK_EQ(bst.has(ch16), true);
-            CHECK_EQ(bst.has(ch17), true);
-            CHECK_EQ(bst.has(ch18), false);
+            CHECK(bst.has(ch12));
+            CHECK(bst.has(ch13));
+            CHECK(bst.has(ch14));
+            CHECK(bst.has(ch15));
+            CHECK(bst.has(ch16));
+            CHECK(bst.has(ch17));
+            CHECK(!bst.has(ch18));
         }
     }
 
@@ -325,23 +349,23 @@ TEST_CASE("BinarySearchTree - tree with both sides") {
         SUBCASE("remove with two descendants") {
             bst.remove(ch2);
             CHECK_EQ(bst.find(ch1)->data, ch1);
-            CHECK_EQ(bst.has(ch2), false);
+            CHECK(!bst.has(ch2));
             CHECK_EQ(bst.find(ch3)->data, ch3);
-            CHECK_EQ(bst.has(ch4), true);
-            CHECK_EQ(bst.has(ch5), true);
-            CHECK_EQ(bst.has(ch6), true);
-            CHECK_EQ(bst.has(ch7), true);
-            CHECK_EQ(bst.has(ch8), false);
+            CHECK(bst.has(ch4));
+            CHECK(bst.has(ch5));
+            CHECK(bst.has(ch6));
+            CHECK(bst.has(ch7));
+            CHECK(!bst.has(ch8));
 
             bst.remove(ch12);
             CHECK_EQ(bst.find(ch1)->data, ch1);
-            CHECK_EQ(bst.has(ch12), false);
+            CHECK(!bst.has(ch12));
             CHECK_EQ(bst.find(ch13)->data, ch13);
-            CHECK_EQ(bst.has(ch14), true);
-            CHECK_EQ(bst.has(ch15), true);
-            CHECK_EQ(bst.has(ch16), true);
-            CHECK_EQ(bst.has(ch17), true);
-            CHECK_EQ(bst.has(ch18), false);
+            CHECK(bst.has(ch14));
+            CHECK(bst.has(ch15));
+            CHECK(bst.has(ch16));
+            CHECK(bst.has(ch17));
+            CHECK(!bst.has(ch18));
         }
         SUBCASE("remove with one descendant") {
             bst.remove(ch5);
@@ -349,7 +373,7 @@ TEST_CASE("BinarySearchTree - tree with both sides") {
             CHECK_EQ(bst.find(ch2)->data, ch2);
             CHECK_EQ(bst.find(ch3)->data, ch3);
             CHECK_EQ(bst.find(ch4)->data, ch4);
-            CHECK_EQ(bst.has(ch5), false);
+            CHECK(!bst.has(ch5));
             CHECK_EQ(bst.find(ch6)->data, ch6);
             CHECK_EQ(bst.find(ch7)->data, ch7);
 
@@ -358,7 +382,7 @@ TEST_CASE("BinarySearchTree - tree with both sides") {
             CHECK_EQ(bst.find(ch12)->data, ch12);
             CHECK_EQ(bst.find(ch13)->data, ch13);
             CHECK_EQ(bst.find(ch14)->data, ch14);
-            CHECK_EQ(bst.has(ch15), false);
+            CHECK(!bst.has(ch15));
             CHECK_EQ(bst.find(ch16)->data, ch16);
             CHECK_EQ(bst.find(ch17)->data, ch17);
         }
@@ -366,7 +390,7 @@ TEST_CASE("BinarySearchTree - tree with both sides") {
             bst.remove(ch3);
             CHECK_EQ(bst.find(ch1)->data, ch1);
             CHECK_EQ(bst.find(ch2)->data, ch2);
-            CHECK_EQ(bst.has(ch3), false);
+            CHECK(!bst.has(ch3));
             CHECK_EQ(bst.find(ch4)->data, ch4);
             CHECK_EQ(bst.find(ch5)->data, ch5);
             CHECK_EQ(bst.find(ch6)->data, ch6);
@@ -375,7 +399,7 @@ TEST_CASE("BinarySearchTree - tree with both sides") {
             bst.remove(ch13);
             CHECK_EQ(bst.find(ch1)->data, ch1);
             CHECK_EQ(bst.find(ch12)->data, ch12);
-            CHECK_EQ(bst.has(ch13), false);
+            CHECK(!bst.has(ch13));
             CHECK_EQ(bst.find(ch14)->data, ch14);
             CHECK_EQ(bst.find(ch15)->data, ch15);
             CHECK_EQ(bst.find(ch16)->data, ch16);
@@ -410,6 +434,23 @@ TEST_CASE("BinarySearchTree - tree with both sides") {
         bst.remove(ch15);
         CHECK_EQ(bst.min(), ch1);
         CHECK_EQ(bst.max(), ch1);
+        CHECK_EQ(bst.root()->data, ch1);
+        CHECK(bst.has(ch1));
+        CHECK(!bst.has(ch2));
+        CHECK(!bst.has(ch3));
+        CHECK(!bst.has(ch4));
+        CHECK(!bst.has(ch5));
+        CHECK(!bst.has(ch6));
+        CHECK(!bst.has(ch7));
+        CHECK(!bst.has(ch8));
+
+        CHECK(!bst.has(ch12));
+        CHECK(!bst.has(ch13));
+        CHECK(!bst.has(ch14));
+        CHECK(!bst.has(ch15));
+        CHECK(!bst.has(ch16));
+        CHECK(!bst.has(ch17));
+        CHECK(!bst.has(ch18));
         CHECK_THROWS_WITH(bst.remove(ch8), "BinarySearchTree - try remove an not existing element");
         CHECK_THROWS_WITH(bst.remove(ch18), "BinarySearchTree - try remove an not existing element");
     }
