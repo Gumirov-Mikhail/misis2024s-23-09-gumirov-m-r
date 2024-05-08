@@ -22,8 +22,8 @@ public:
     void swap(StackLstT<T>& other);
     void merge(StackLstT<T>& other);
 
-    bool empty() const;
-    std::ptrdiff_t size() const;
+    [[nodiscard]] bool empty() const;
+    [[nodiscard]] std::ptrdiff_t size() const;
 
     bool operator==(const StackLstT<T>& rhs) const;
     bool operator!=(const StackLstT<T>& rhs) const;
@@ -106,7 +106,6 @@ void StackLstT<T>::pop() {
         Node* temp = head_;
         head_ = head_->next;
         delete temp;
-        temp = nullptr;
     }
 }
 
