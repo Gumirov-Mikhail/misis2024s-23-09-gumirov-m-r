@@ -22,8 +22,8 @@ public:
     void swap(StackArrT<T>& other);
     void merge(StackArrT<T>& other);
 
-    bool empty() const;
-    std::ptrdiff_t size() const;
+    [[nodiscard]] bool empty() const;
+    [[nodiscard]] std::ptrdiff_t size() const;
 
     bool operator==(const StackArrT<T>& rhs) const;
     bool operator!=(const StackArrT<T>& rhs) const;
