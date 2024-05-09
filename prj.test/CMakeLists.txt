@@ -13,10 +13,10 @@ target_link_libraries(test_stackarr stackarr)
 add_executable(test_stacklst test_stacklst.cpp)
 target_link_libraries(test_stacklst stacklst)
 
-add_executable(test_stackarrt test_stackarrt.cpp)
+add_executable(test_stackarrt test_stackarrt.cpp unittest.hpp)
 target_link_libraries(test_stackarrt stackarrt)
 
-add_executable(test_stacklstt test_stacklstt.cpp)
+add_executable(test_stacklstt test_stacklstt.cpp unittest.hpp)
 target_link_libraries(test_stacklstt stacklstt)
 
 add_executable(test_dynarr test_dynarr.cpp)
@@ -39,3 +39,15 @@ target_link_libraries(test_istackarrt istackarrt)
 
 add_executable(test_istacklstt test_istacklstt.cpp)
 target_link_libraries(test_istacklstt istacklstt)
+
+add_executable(test_queuelstprt test_queuelstprt.cpp unittest.hpp)
+target_link_libraries(test_queuelstprt queuelstprt)
+
+add_executable(test_queuearrt test_queuearrt.cpp unittest.hpp)
+target_link_libraries(test_queuearrt queuearrt)
+
+add_executable(test_queuelstt test_queuelstt.cpp unittest.hpp)
+target_link_libraries(test_queuelstt queuelstt)
+
+add_executable(test_dynarrt test_dynarrt.cpp unittest.hpp)
+target_link_libraries(test_dynarrt dynarrt)

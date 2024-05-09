@@ -4,6 +4,7 @@
 
 #include <stacklstt/stacklstt.hpp>
 
+
 #define TYPE_TEST int, float, double, long long
 
 TEST_CASE_TEMPLATE("StackLstT - Constructors", T, TYPE_TEST) {
@@ -231,7 +232,86 @@ TEST_CASE_TEMPLATE("StackLstT - Assignment", T, TYPE_TEST) {
     }
 }
 
+#include "unittest.hpp"
 
+#define TYPES int, double, std::string
+
+TEST_CASE_TEMPLATE_DEFINE("StackLstT", T, stacklstt) {
+    StackLstT<T> stack;
+    CHECK(stack.empty());
+
+    std::vector<T> data;
+    const int size = 4;
+    FillData(size, data);
+
+    T c1 = data[0];
+    T c2 = data[1];
+    T c3 = data[2];
+
+    stack.push(c1);
+    CHECK(!stack.empty());
+    CHECK_EQ(stack.top(), c1);
+    stack.push(c2);
+    CHECK_EQ(stack.top(), c2);
+    stack.push(c3);
+    CHECK_EQ(stack.top(), c3);
+
+    StackLstT<T> stack_copy(stack);
+    CHECK(!stack.empty());
+    CHECK(!stack_copy.empty());
+    CHECK_EQ(stack_copy.top(), c3);
+    stack_copy.pop();
+    CHECK_EQ(stack_copy.top(), c2);
+    stack_copy.pop();
+    CHECK_EQ(stack_copy.top(), c1);
+    stack_copy.pop();
+    CHECK(stack_copy.empty());
+
+    StackLstT<T> stack_copy_assignment;
+    stack_copy_assignment = stack;
+    CHECK(!stack.empty());
+    CHECK(!stack_copy_assignment.empty());
+    CHECK_EQ(stack_copy_assignment.top(), c3);
+    stack_copy_assignment.pop();
+    CHECK_EQ(stack_copy_assignment.top(), c2);
+    stack_copy_assignment.pop();
+    CHECK_EQ(stack_copy_assignment.top(), c1);
+    stack_copy_assignment.pop();
+    CHECK(stack_copy_assignment.empty());
+
+    CHECK_THROWS_WITH((void) stack_copy.top(), "StackLstT - try get top from empty stack.");
+    CHECK_THROWS_WITH((void) stack_copy_assignment.top(), "StackLstT - try get top from empty stack.");
+
+    StackLstT<T> stack2;
+    stack2 = stack;
+
+    StackLstT<T> stack_move(std::move(stack));
+    CHECK(stack.empty());
+    CHECK(!stack_move.empty());
+    CHECK_EQ(stack_move.top(), c3);
+    stack_move.pop();
+    CHECK_EQ(stack_move.top(), c2);
+    stack_move.pop();
+    CHECK_EQ(stack_move.top(), c1);
+    stack_move.pop();
+    CHECK(stack_move.empty());
+
+    StackLstT<T> stack_move_assignments;
+    stack_move_assignments = std::move(stack2);
+    CHECK(stack2.empty());
+    CHECK(!stack_move_assignments.empty());
+    CHECK_EQ(stack_move_assignments.top(), c3);
+    CHECK_EQ(stack_move_assignments.top(), c3);
+    stack_move_assignments.pop();
+    CHECK_EQ(stack_move_assignments.top(), c2);
+    stack_move_assignments.pop();
+    CHECK_EQ(stack_move_assignments.top(), c1);
+    stack_move_assignments.pop();
+    CHECK(stack_move_assignments.empty());
+}
+
+
+TEST_CASE_TEMPLATE_INVOKE(stacklstt, TYPES);
 
 
 
