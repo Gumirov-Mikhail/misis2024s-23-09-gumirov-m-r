@@ -1,4 +1,19 @@
+# Неделя с 13.05 по 19.05
+
+### Планы:
+1) Написать hashTable
+2) 3 Задачи на codeforces
+3) Переделать QueueArr и написать QueueArrT
+
 # Неделя с 06.05 по 12.05
+
+### Выполнено:
+1) Переделал IStackBase with Inheritance
+2) Доделал деструктор и метод Remove в BinarySearchTree + сделал адекватные тесты
+3) Написал специализацию (Unittest)
+4) Написал все шаблонные классы (QueueArrT, QueueLstT, QueueLstPrT), кроме QueueArrT
+5) Написал шаблонные тесты через Unittest для типов int, double, string
+6) 3 Задачи на codeforces
 
 ### Планы:
 1) 3 Задачи на codeforces
