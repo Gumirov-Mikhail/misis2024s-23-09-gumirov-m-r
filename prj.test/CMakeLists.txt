@@ -51,3 +51,6 @@ target_link_libraries(test_queuelstt queuelstt)
 
 add_executable(test_dynarrt test_dynarrt.cpp unittest.hpp)
 target_link_libraries(test_dynarrt dynarrt)
+
+add_executable(test_hashtable test_hashtable.cpp)
+target_link_libraries(test_hashtable hashtable)
