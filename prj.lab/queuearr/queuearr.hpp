@@ -3,7 +3,7 @@
 #define QUEUEARR_QUEUEARR_HPP_202404
 
 #include <complex/complex.hpp>
-
+#include <memory>
 #include <cstddef>
 
 class QueueArr final {
@@ -14,7 +14,7 @@ public:
 
     QueueArr(QueueArr&& rhs) noexcept;
 
-    ~QueueArr();
+    ~QueueArr() = default;
 
     QueueArr& operator=(const QueueArr& rhs);
 
@@ -33,10 +33,10 @@ public:
     void Clear() noexcept;
 
 private:
-    std::ptrdiff_t size_ = 0;  //!<
-    Complex* data_ = nullptr;  //!<
-    std::ptrdiff_t head_ = -1; //!<
-    std::ptrdiff_t tail_ = -1; //!<
+    std::ptrdiff_t capacity_ = 0;
+    std::ptrdiff_t head_ = -1;
+    std::ptrdiff_t tail_ = -1;
+    std::unique_ptr<Complex[]> data_ = std::make_unique<Complex[]>(capacity_);
 private:
     std::ptrdiff_t Count() const;
 };
