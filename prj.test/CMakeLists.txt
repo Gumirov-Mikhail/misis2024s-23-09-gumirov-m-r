@@ -54,3 +54,6 @@ target_link_libraries(test_dynarrt dynarrt)
 
 add_executable(test_hashtable test_hashtable.cpp)
 target_link_libraries(test_hashtable hashtable)
+
+add_executable(test_customcontainer test_customcontainer.cpp)
+target_link_libraries(test_customcontainer customcontainer)
