@@ -31,7 +31,7 @@ private:
 public:
     CustomContainer();
     CustomContainer(const int& capacity);
-    virtual ~CustomContainer();
+    ~CustomContainer() override;
 
     void add(const int& value) override;
 

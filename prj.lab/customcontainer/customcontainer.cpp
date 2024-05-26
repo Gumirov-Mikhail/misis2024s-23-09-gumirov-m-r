@@ -15,15 +15,12 @@ CustomContainer::CustomContainer(const int &capacity) {
 CustomContainer::~CustomContainer() {
     Node* temp = head;
     Node* current = nullptr;
-    while (temp != tail) {
+    while (temp != nullptr) {
         current = temp;
-        temp = temp->next;
-        delete [] current->data;
-        delete current;
+        delete [] temp->data;
+        delete temp;
+        temp = current->next;
     }
-    current = temp;
-    delete [] current->data;
-    delete current;
 }
 
 void CustomContainer::add(const int &value) {
@@ -63,18 +60,13 @@ void CustomContainer::remove(int &value) {
 
 bool CustomContainer::contains(const int &value) {
     Node* temp = head;
-    while (temp != tail) {
+    while (temp != nullptr) {
         for (int i = 0; i < temp->size; i++) {
             if (temp->data[i] == value) {
                 return true;
             }
         }
         temp = temp->next;
-    }
-    for (int i = 0; i < temp->size; i++) {
-        if (temp->data[i] == value) {
-            return true;
-        }
     }
     return false;
 }
@@ -83,7 +75,7 @@ bool CustomContainer::operator==(const CustomContainer &rhs) {
     Node* temp = head;
     Node* temp_rhs = rhs.head;
     if (nodeCapacity == rhs.nodeCapacity) {
-        while (temp != tail->next || temp_rhs != rhs.tail->next) {
+        while (temp != nullptr || temp_rhs != nullptr) {
             for (int i = 0; i < temp->size; i++) {
                 if (temp->data[i] != temp_rhs->data[i]) {
                     return false;
@@ -92,8 +84,8 @@ bool CustomContainer::operator==(const CustomContainer &rhs) {
             temp = temp->next;
             temp_rhs = temp_rhs->next;
         }
-        if (temp != nullptr || temp_rhs != nullptr) {
-            return false;
+        if (temp == nullptr && temp_rhs == nullptr) {
+            return true;
         }
     }
     else {

@@ -21,5 +21,5 @@ TEST_CASE("Container") {
     b.add(8);
     CHECK(a == b);
     b.add(9);
-    CHECK(a != b);
+    CHECK(!(a == b));
 }
