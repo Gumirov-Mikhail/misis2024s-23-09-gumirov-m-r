@@ -68,6 +68,7 @@ public:
             if (current != nullptr) {
                 return std::pair<const KeyType &, ValueType &>(current->key, current->value);
             }
+            return std::pair<const KeyType &, ValueType &>(current->key, current->value);
         }
 
     };
